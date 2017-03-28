@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>{{page.title}}</title>
-	<link rel="stylesheet" href="../_sass/style.scss">
-</head>
-<body> 
-<section class="container">{{content}}</section>   
-</body>
-</html>
+{% include header.html %}
+<section class="container">
+	{{content}}
+</section>   
+{% include footer.html %}

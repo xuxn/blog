@@ -1,4 +1,45 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+ul,li{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
 .container{
 	width:1024px;
 	margin:0 auto;
+	min-height:1000px;
+}
+.arc-list{
+	width:100%;
+}
+.arc-list li{
+	margin-bottom: 30px;
+}
+.arc-title{
+	font-size: 36px;
+	font-weight: normal;
+	margin:0;
+}
+.arc-title a{
+	color:#333;
+	text-decoration: none;
+}
+.arc-date{
+	color:#ccc;
+	font-size: 14px;
+}
+footer{
+	border-top:1px solid #ddd;
+	text-align: center;
+	padding: 20px 0;
+	margin-top: 20px;
+	clear:both;
+	width:1024px;
+	margin:0 auto;
+}
+.pagination{
+	float: right;
 }
