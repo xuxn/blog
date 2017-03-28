@@ -1,5 +1,5 @@
 ---
-categories: 类别
+categories: learn
 layout: post-detail
 title:  "Flexbox学习"
 ---

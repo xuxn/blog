@@ -1,5 +1,5 @@
 ---
-categories: 类别
+categories: learn
 layout: post-detail
 title:  "Welcome to jekyll"
 date:   2017-01-19 17:41:04 +0800
