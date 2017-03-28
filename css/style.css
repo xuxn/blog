@@ -57,8 +57,11 @@ header h1 span{
 }
 .container{
 	width:1024px;
-	margin:20px auto;
+	max-width:100%;
+	margin:0 auto;
+	padding:20px;
 	min-height:1000px;
+	box-sizing: border-box;
 }
 .arc-list{
 	width:100%;
