@@ -12,7 +12,7 @@ excerpt: "sfslfkfdsdiisdifijj"
         <li>
           <h2 class="arc-title"><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h2>
           <p class="arc-date">{{ post.date | date:"%Y-%m-%d"}} </p>
-          <p class="arc-con">{{ post.content |split:"<!--more-->"| first | strip_html | truncate:300 }}{%if post.content | size >300 %}<a href="{{post.url}}" class="more">Read more</a>{% endif %}</p>
+          <p class="arc-con">{{ post.content |split:"<!--more-->"| first | strip_html | truncate:300 }}{%if post.content | size >300 %}<a href="{{post.url}}" class="more">Read More</a>{% endif %}</p>
         </li>
     {% endfor %}
 </ul>

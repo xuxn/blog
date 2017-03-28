@@ -18,9 +18,18 @@
   font-weight: normal;
   font-style: normal;
 }
+body{ 
+	margin: 0;
+	padding: 0; 
+	font-size: 14px;
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
 *{
 	margin: 0;
 	padding: 0;
+}
+h1,h2,h3,h4{
+	font-weight: normal;
 }
 ul,li{
 	margin: 0;
@@ -69,6 +78,21 @@ header h1 span{
 .arc-date{
 	color:#ccc;
 	font-size: 14px;
+}
+.arc-con{
+	margin-top: 10px;
+	line-height: 24px;
+}
+.arc-con:after{
+	content:"";
+	clear:both;
+	display: block;
+}
+.more{
+	float: right;
+	color:orange;
+	margin-top: 20px;
+	color:#FF9800;
 }
 footer{
 	border-top:1px solid #ddd;
