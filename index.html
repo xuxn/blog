@@ -1,15 +1,10 @@
 ---
-layout: default
-title: Elaine Blog
+layout: default 
 paginate: 5
 paginate_path: "blog/page:num" 
 excerpt: "sfslfkfdsdiisdifijj"
 ---
-
-
-<h1>{{ page.title }}</h1>
-
-
+ 
 <!-- 遍历后的文章 -->
 {% for category in site.categories %}
 <ul class="arc-list">
@@ -17,7 +12,7 @@ excerpt: "sfslfkfdsdiisdifijj"
         <li>
           <h2 class="arc-title"><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h2>
           <p class="arc-date">{{ post.date | date:"%Y-%m-%d"}} </p>
-          <p>{{ post.content |split:"<!--more-->"| first | strip_html | truncate:300 }}{%if post.content | size >300 %}<a href="{{post.url}}">Read more</a>{% endif %}</p>
+          <p class="arc-con">{{ post.content |split:"<!--more-->"| first | strip_html | truncate:300 }}{%if post.content | size >300 %}<a href="{{post.url}}" class="more">Read more</a>{% endif %}</p>
         </li>
     {% endfor %}
 </ul>
@@ -25,7 +20,7 @@ excerpt: "sfslfkfdsdiisdifijj"
 
 
 <!-- 分页链接 -->
-<div class="pagination">
+<!-- <div class="pagination">
   {% if paginator.previous_page %}
     <a href="/page{{ paginator.previous_page }}" class="previous">Previous</a>
   {% else %}
@@ -38,7 +33,7 @@ excerpt: "sfslfkfdsdiisdifijj"
     <span class="next ">Next</span>
   {% endif %}
 </div>
-
+ -->
 
  
 
