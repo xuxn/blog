@@ -11,37 +11,65 @@
 </header>     
 <section class="container">
 	<div class="arc-con">
-		<p>#gitbook的安装
-<strong>1. 执行<code class="highlighter-rouge">$ npm install gitbook -g</code></strong>，但是会有报错
-<img src="/blog/img/14.png" alt="gitbook" />
-<strong>2. 根据提示执行<code class="highlighter-rouge">npm uninstall -g gitbook</code>和<code class="highlighter-rouge">npm install -g gitbook-cli</code>，如果是mac系统要加sudo</strong>
-<strong>3. 执行<code class="highlighter-rouge">gitbook -V</code>就开始安装，注意是大写V</strong>
-<img src="/blog/img/15.png" alt="gitbook" />
-<strong>3. 再执行<code class="highlighter-rouge">gitbook -V</code>查看是否安装成功</strong>
-<img src="/blog/img/16.png" alt="gitbook" />
-<strong>4. 新建一个目录gitbook，执行初始化<code class="highlighter-rouge">gitbook init</code>，之后gitbook这个目录下会生成README.md和SUMMARY.md这两个文件
-**
-<img src="/blog/img/17.png" alt="gitbook" />
-**5. 编辑SUMMARY.md</strong>
-SUMMARY.md就是一个目录文件，需要把添加的文件路径放到这里以便生成对应的目录
-<img src="/blog/img/18.png" alt="gitbook" />
-<img src="/blog/img/19.png" alt="gitbook" />
-<img src="/blog/img/20.png" alt="gitbook" />
-<img src="/blog/img/21png" alt="gitbook" />
-<strong>6. 执行<code class="highlighter-rouge">gitbook build</code>就会生成_book 的文件夹</strong>
-<img src="/blog/img/22.png" alt="gitbook" />
-<strong>7. 执行<code class="highlighter-rouge">gitbook serve</code>在浏览器中输入http://localhost:4000/就可以预览</strong>
-<img src="/blog/img/23.png" alt="gitbook" />
-###安装插件，例如代码高亮
-<strong>1. 执行<code class="highlighter-rouge">npm install gitbook-plugin-prism -g</code>也可以不用-g全局安装，这样只在当前目录下生成node_modules，注意mac上要加sudo，以后所有的插件都是gitbook-plugin-加插件名称</strong>
-<strong>2. 最后自己创建文件book.json,放到根目录下</strong>
-<img src="/blog/img/24.png" alt="gitbook" />
-<strong>3. 编辑book.json文件，如果安装插件，则修改”plugins”:[]</strong>
-<img src="/blog/img/25.png" alt="gitbook" />
-<strong>4. 安装disqus和duoshuo插件后<code class="highlighter-rouge">gitbook build</code>会报错不存在</strong>
-<img src="/blog/img/26.png" alt="gitbook" />
-<strong>5. 请将插件安装到gitbook模块所在的目录，即node_modules目录下</strong>
-<img src="/blog/img/27.png" alt="gitbook" /></p>
+		<h1 id="gitbook的安装">gitbook的安装</h1>
+
+<h3 id="1-执行-npm-install-gitbook--g但是会有报错"><strong>1. 执行<code class="highlighter-rouge">$ npm install gitbook -g</code></strong>，但是会有报错</h3>
+
+<p><img src="/blog/img/2017-3-30/14.png" alt="gitbook" /></p>
+
+<h3 id="2-根据提示执行npm-uninstall--g-gitbook和npm-install--g-gitbook-cli如果是mac系统要加sudo"><strong>2. 根据提示执行<code class="highlighter-rouge">npm uninstall -g gitbook</code>和<code class="highlighter-rouge">npm install -g gitbook-cli</code>，如果是mac系统要加sudo</strong></h3>
+
+<h3 id="3-执行gitbook--v就开始安装注意是大写v"><strong>3. 执行<code class="highlighter-rouge">gitbook -V</code>就开始安装，注意是大写V</strong></h3>
+
+<p><img src="/blog/img/2017-3-30/15.png" alt="gitbook" /></p>
+
+<h3 id="3-再执行gitbook--v查看是否安装成功"><strong>3. 再执行<code class="highlighter-rouge">gitbook -V</code>查看是否安装成功</strong></h3>
+
+<p><img src="/blog/img/2017-3-30/16.png" alt="gitbook" /></p>
+
+<h3 id="4-新建一个目录gitbook执行初始化gitbook-init之后gitbook这个目录下会生成readmemd和summarymd这两个文件"><strong>4. 新建一个目录gitbook，执行初始化<code class="highlighter-rouge">gitbook init</code>，之后gitbook这个目录下会生成README.md和SUMMARY.md这两个文件</strong></h3>
+
+<p><img src="/blog/img/2017-3-30/17.png" alt="gitbook" /></p>
+
+<h3 id="5-编辑summarymd"><strong>5. 编辑SUMMARY.md</strong></h3>
+
+<p>SUMMARY.md就是一个目录文件，需要把添加的文件路径放到这里以便生成对应的目录</p>
+
+<p><img src="/blog/img/2017-3-30/18.png" alt="gitbook" /></p>
+
+<p><img src="/blog/img/2017-3-30/19.png" alt="gitbook" /></p>
+
+<p><img src="/blog/img/2017-3-30/20.png" alt="gitbook" /></p>
+
+<p><img src="/blog/img/2017-3-30/21png" alt="gitbook" /></p>
+
+<h3 id="6-执行gitbook-build就会生成_book-的文件夹"><strong>6. 执行<code class="highlighter-rouge">gitbook build</code>就会生成_book 的文件夹</strong></h3>
+
+<p><img src="/blog/img/2017-3-30/22.png" alt="gitbook" /></p>
+
+<h3 id="7-执行gitbook-serve在浏览器中输入httplocalhost4000就可以预览"><strong>7. 执行<code class="highlighter-rouge">gitbook serve</code>在浏览器中输入http://localhost:4000/就可以预览</strong></h3>
+
+<p><img src="/blog/img/2017-3-30/23.png" alt="gitbook" /></p>
+
+<h2 id="安装插件例如代码高亮">安装插件，例如代码高亮</h2>
+
+<h3 id="1-执行npm-install-gitbook-plugin-prism--g也可以不用-g全局安装这样只在当前目录下生成node_modules注意mac上要加sudo以后所有的插件都是gitbook-plugin-加插件名称"><strong>1. 执行<code class="highlighter-rouge">npm install gitbook-plugin-prism -g</code>也可以不用-g全局安装，这样只在当前目录下生成node_modules，注意mac上要加sudo，以后所有的插件都是gitbook-plugin-加插件名称</strong></h3>
+
+<h3 id="2-最后自己创建文件bookjson放到根目录下"><strong>2. 最后自己创建文件book.json,放到根目录下</strong></h3>
+
+<p><img src="/blog/img/2017-3-30/24.png" alt="gitbook" /></p>
+
+<h3 id="3-编辑bookjson文件如果安装插件则修改plugins"><strong>3. 编辑book.json文件，如果安装插件，则修改”plugins”:[]</strong></h3>
+
+<p><img src="/blog/img/2017-3-30/25.png" alt="gitbook" /></p>
+
+<h3 id="4-安装disqus和duoshuo插件后gitbook-build会报错不存在"><strong>4. 安装disqus和duoshuo插件后<code class="highlighter-rouge">gitbook build</code>会报错不存在</strong></h3>
+
+<p><img src="/blog/img/2017-3-30/26.png" alt="gitbook" /></p>
+
+<h3 id="5-请将插件安装到gitbook模块所在的目录即node_modules目录下"><strong>5. 请将插件安装到gitbook模块所在的目录，即node_modules目录下</strong></h3>
+
+<p><img src="/blog/img/2017-3-30/27.png" alt="gitbook" /></p>
 
 	</div>
 </section>   

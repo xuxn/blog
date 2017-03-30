@@ -1,13 +1,15 @@
 ---
 categories: learn
 layout: post-detail
-title:  "Welcome to jekyll"
+title:  "Flexbox学习之一"
 date:   2017-01-19 17:41:04 +0800
 ---
-#Flexbox学习之一
+
+# Flexbox学习之一
+
 xuxn.github.io布局想要实现左右1:2的布局，用到了```flex:1 0 0```和```flex:2 0 0```，这样的写法其实是Flexbox的3个属性，依次是```flex-grow，flex-shrink，flex-basis```，flex-basis是Flexbox项目的基准值，决定着其他两个属性。
 
-**1. flex-grow（扩展比例）**
+### **1. flex-grow（扩展比例）**
 
 *1.1 注意flex-grow值不依赖于其他项，容器里一个flex-grow为4的项不一定是另一个flex-grow为2的项的2倍。*
 
@@ -31,7 +33,7 @@ xuxn.github.io布局想要实现左右1:2的布局，用到了```flex:1 0 0```�
 每项伸缩大小 = (伸缩基准值 + (可扩展空间 x flex-grow值))
 ```
 
-**2. flex-shrink（收缩）**
+### **2. flex-shrink（收缩）**
 
 
 *2.1 应用于当项目超过容器计算值时就会将项目压缩*
@@ -57,7 +59,7 @@ xuxn.github.io布局想要实现左右1:2的布局，用到了```flex:1 0 0```�
 每项移除空间 = 每项收缩因数(0.286) x 负可用空间(-200px) 57.142向下舍入为57
 ```
 
-**3. flex-basis（伸缩基准值）**
+### **3. flex-basis（伸缩基准值）**
 
 *3.1 要使每个项目是另一个项目的精准倍数只能将flex-basis设置为0*
 
@@ -132,7 +134,7 @@ xuxn.github.io布局想要实现左右1:2的布局，用到了```flex:1 0 0```�
 * 7.当 item-1 基准值取 0% 的时候，是把该项目视为零尺寸的，故即便声明其尺寸为 140px，也并没有什么用，形同虚设
 * 8.而 item-2 基准值取 auto 的时候，根据规则基准值使用值是主尺寸值即 100px，故这 100px 不会纳入剩余空间
 
-**4. flex**
+### **4. flex**
 
 *4.1默认值为0 1 auto*
 
