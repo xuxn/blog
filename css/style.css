@@ -94,8 +94,15 @@ header h1 span{
 .arc-con img{
 	max-width:100%;
 	height:auto;
-	margin:10px 0;
+	margin:10px 0 0;
 } 
+.arc-con h1{
+	margin-bottom: 30px;
+    font-size: 32px;
+}
+.arc-con h3{
+	margin-top: 20px;
+}
 .more{
 	float: right;
 	color:orange;
