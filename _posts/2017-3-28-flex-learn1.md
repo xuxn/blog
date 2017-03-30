@@ -1,3 +1,9 @@
+---
+categories: learn
+layout: post-detail
+title: "Flexbox学习之一"
+date: 2017-3-30 17:00:00 +0800 
+---
 #Flexbox学习之一
 xuxn.github.io布局想要实现左右1:2的布局，用到了```flex:1 0 0```和```flex:2 0 0```，这样的写法其实是Flexbox的3个属性，依次是```flex-grow，flex-shrink，flex-basis```，flex-basis是Flexbox项目的基准值，决定着其他两个属性。
 **1. flex-grow（扩展比例）**
@@ -93,6 +99,7 @@ xuxn.github.io布局想要实现左右1:2的布局，用到了```flex:1 0 0```�
 ```
 * 7.当 item-1 基准值取 0% 的时候，是把该项目视为零尺寸的，故即便声明其尺寸为 140px，也并没有什么用，形同虚设
 * 8.而 item-2 基准值取 auto 的时候，根据规则基准值使用值是主尺寸值即 100px，故这 100px 不会纳入剩余空间
+
 **4. flex**
 > * 默认值为0 1 auto
 > * ```flex:1;```让所有弹性盒模型对象的子元素都有相同的长度
