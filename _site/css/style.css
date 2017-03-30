@@ -91,6 +91,11 @@ header h1 span{
 	clear:both;
 	display: block;
 }
+.arc-con img{
+	max-width:100%;
+	height:auto;
+	margin:10px 0;
+} 
 .more{
 	float: right;
 	color:orange;
