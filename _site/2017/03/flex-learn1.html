@@ -1,0 +1,181 @@
+<p>#Flexbox学习之一
+xuxn.github.io布局想要实现左右1:2的布局，用到了<code class="highlighter-rouge">flex:1 0 0</code>和<code class="highlighter-rouge">flex:2 0 0</code>，这样的写法其实是Flexbox的3个属性，依次是<code class="highlighter-rouge">flex-grow，flex-shrink，flex-basis</code>，flex-basis是Flexbox项目的基准值，决定着其他两个属性。
+<strong>1. flex-grow（扩展比例）</strong></p>
+<blockquote>
+  <ul>
+    <li>注意flex-grow值不依赖于其他项，容器里一个flex-grow为4的项不一定是另一个flex-grow为2的项的2倍。</li>
+    <li>flex-grow属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大</li>
+  </ul>
+</blockquote>
+
+<ul>
+  <li>计算 每个项目实际分配的像素值
+    <div class="highlighter-rouge"><pre class="highlight"><code>可用空间 = (容器大小 - 所有相邻项目flex-basis的总和)
+</code></pre>
+    </div>
+  </li>
+  <li>计算每个项目可扩展的大小
+    <div class="highlighter-rouge"><pre class="highlight"><code>可扩展空间 = (可用空间/所有相邻项目flex-grow的总和)
+</code></pre>
+    </div>
+  </li>
+  <li>计算每项伸缩大小(即每个项目宽度)
+    <div class="highlighter-rouge"><pre class="highlight"><code>每项伸缩大小 = (伸缩基准值 + (可扩展空间 x flex-grow值))
+</code></pre>
+    </div>
+    <p><strong>2. flex-shrink（收缩）</strong></p>
+    <blockquote>
+      <ul>
+        <li>应用于当项目超过容器计算值时就会将项目压缩</li>
+        <li>flex-shrink属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>计算每项收缩比例值乘以伸展基准值并累加
+    <div class="highlighter-rouge"><pre class="highlight"><code>所有项目总和 = (项目一伸缩值 x 项目一伸缩基准值 + 项目二伸缩值 x 项目二伸缩基准值 + 项目三伸缩值 x 项目三伸缩基准值)
+</code></pre>
+    </div>
+  </li>
+  <li>计算每项收缩因数
+    <div class="highlighter-rouge"><pre class="highlight"><code>每项收缩因数 = 每项伸缩值 x 每项伸缩基准值/所有项目总和 0.286
+</code></pre>
+    </div>
+  </li>
+  <li>计算每项移除空间
+    <div class="highlighter-rouge"><pre class="highlight"><code>每项移除空间 = 每项收缩因数(0.286) x 负可用空间(-200px) 57.142向下舍入为57
+</code></pre>
+    </div>
+  </li>
+</ul>
+
+<p><strong>3. flex-basis（伸缩基准值）</strong></p>
+<blockquote>
+  <ul>
+    <li>要使每个项目是另一个项目的精准倍数只能将flex-basis设置为0</li>
+    <li>默认值为auto，可以设为跟width或height属性一样的值（比如350px），则项目将占据固定空间</li>
+    <li>auto：首先检索该子元素的主尺寸，如果主尺寸不为 auto，则使用值采取主尺寸之值；如果也是 auto，则使用值为 content。</li>
+    <li>content：指根据该子元素的内容自动布局。有的用户代理没有实现取 content 值，等效的替代方案是 flex-basis 和主尺寸都取 auto。</li>
+    <li>百分比：根据其包含块（即伸缩父容器）的主尺寸计算。如果包含块的主尺寸未定义（即父容器的主尺寸取决于子元素），则计算结果和设为 auto 一样。</li>
+  </ul>
+</blockquote>
+
+<p><strong>举一个不同的值之间的区别</strong></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;div class="parent"&gt;
+    &lt;div class="item-1"&gt;&lt;/div&gt;
+    &lt;div class="item-2"&gt;&lt;/div&gt;
+    &lt;div class="item-3"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;style type="text/css"&gt;
+    .parent {
+        display: flex;
+        width: 600px;
+    }
+    .parent &gt; div {
+        height: 100px;
+    }
+    .item-1 {
+        width: 140px;
+        flex: 2 1 0%;
+        background: blue;
+    }
+    .item-2 {
+        width: 100px;
+        flex: 2 1 auto;
+        background: darkblue;
+    }
+    .item-3 {
+        flex: 1 1 200px;
+        background: lightblue;
+    }
+&lt;/style&gt;
+</code></pre>
+</div>
+<ul>
+  <li>1.主轴上父容器总尺寸为 600px</li>
+  <li>2.子元素的总基准值是：0% + auto + 200px = 300px，其中
+```</li>
+  <li>0% 即 0 宽度</li>
+  <li>auto 对应取主尺寸即 100px
+```</li>
+  <li>3.故剩余空间为 600px - 300px = 300px</li>
+  <li>4.伸缩放大系数之和为： 2 + 2 + 1 = 5</li>
+  <li>5.剩余空间分配如下
+```</li>
+  <li>item-1 和 item-2 各分配 2/5，各得 120px</li>
+  <li>item-3 分配 1/5，得 60px
+```</li>
+  <li>6.各项目最终宽度为：
+```</li>
+  <li>item-1 = 0% + 120px = 120px</li>
+  <li>item-2 = auto + 120px = 220px</li>
+  <li>item-3 = 200px + 60px = 260px
+```</li>
+  <li>7.当 item-1 基准值取 0% 的时候，是把该项目视为零尺寸的，故即便声明其尺寸为 140px，也并没有什么用，形同虚设</li>
+  <li>8.而 item-2 基准值取 auto 的时候，根据规则基准值使用值是主尺寸值即 100px，故这 100px 不会纳入剩余空间
+<strong>4. flex</strong>
+    <blockquote>
+      <ul>
+        <li>默认值为0 1 auto</li>
+        <li><code class="highlighter-rouge">flex:1;</code>让所有弹性盒模型对象的子元素都有相同的长度</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>当 flex 取值为 none，则计算值为 0 0 auto
+    <div class="highlighter-rouge"><pre class="highlight"><code>.item {flex: none;}
+.item {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
+}
+</code></pre>
+    </div>
+  </li>
+  <li>当 flex 取值为 auto，则计算值为 1 1 auto
+    <div class="highlighter-rouge"><pre class="highlight"><code>.item {flex: auto;}
+.item {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+}
+</code></pre>
+    </div>
+  </li>
+  <li>当 flex 取值为一个非负数字，则该数字为 flex-grow 值，flex-shrink 取 1，flex-basis 取 0%
+    <div class="highlighter-rouge"><pre class="highlight"><code>.item {flex: 1;}
+.item {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0%;
+}
+</code></pre>
+    </div>
+  </li>
+  <li>当 flex 取值为一个长度或百分比，则视为 flex-basis 值，flex-grow 取 1，flex-shrink 取 1
+    <div class="highlighter-rouge"><pre class="highlight"><code>.item-1 {flex: 0%;}
+.item-1 {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0%;
+}
+.item-2 {flex: 24px;}
+.item-1 {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 24px;
+}
+</code></pre>
+    </div>
+  </li>
+  <li>当 flex 取值为两个非负数字，则分别视为 flex-grow 和 flex-shrink 的值，flex-basis 取 0%
+    <div class="highlighter-rouge"><pre class="highlight"><code>.item {flex: 2 3;}
+.item {
+  flex-grow: 2;
+  flex-shrink: 3;
+  flex-basis: 0%;
+}
+</code></pre>
+    </div>
+  </li>
+</ul>
+

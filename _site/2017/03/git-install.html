@@ -1,0 +1,37 @@
+<p>#安装git
+##windows安装
+<strong>**</strong><strong>**
+**1. 下载git客户端</strong>
+下载地址为：<a href="https://git-scm.com/download/mac">https://git-scm.com/download/mac</a>
+<strong>2. 打开安装包</strong>
+<img src="/blog/img/1.png" alt="git install" />
+<strong>3. git config 配置</strong></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>git config --global user.name shining
+git config --global user.email shining@achang.com 
+git config --list
+</code></pre>
+</div>
+<p><img src="/blog/img/2.png" alt="git install" /></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>ssh-keygen -t rsa -C "shining@achang.com"
+</code></pre>
+</div>
+<p><img src="/blog/img/3.png" alt="git install" />
+<strong>5. id_rsa.pub查看ssh key</strong>
+<img src="/blog/img/4.png" alt="git install" /></p>
+
+<p>##mac安装
+<strong>**</strong><strong>**</strong>*****
+同上1,2步骤，但是双击安装包之后无法安装成功，这个需要权限，按住control键之后，再点击pkg文件，这个时候会弹出安装程序的界面，选择打开，就可以完成安装了。
+<img src="/blog/img/5.png" alt="git install" /></p>
+
+<p><strong>打开终端，生成SSH key</strong></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>cd ~/.ssh
+ssh-keygen -t rsa -C jonezhang86@gmail.com
+</code></pre>
+</div>
+<p><strong>copy SSh key</strong></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>vim id_rsa.pub
+</code></pre>
+</div>
+<p>a.pub
+```</p>
