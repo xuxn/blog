@@ -55,11 +55,16 @@ header h1 span{
 	font-family: Lato-light;
 	font-weight: normal;
 }
-.highlighter-rouge{
+div.highlighter-rouge{
 	padding: 10px;
     border: 1px solid #ddd;
     margin: 10px 0;
     background: #efefef;
+}
+code.highlighter-rouge{
+    padding: 4px; 
+    background: #efefef;
+    display: inline-block;
 }
 .container{
 	width:1024px;
