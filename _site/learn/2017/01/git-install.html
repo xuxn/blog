@@ -5,6 +5,7 @@
 	<title>Elaine blog</title>
 	 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 	<link rel="stylesheet" href="/blog/css/style.css">
+	<link rel="stylesheet" href="/blog/css/highlight.css">
 </head>
 <body>
 <header>
@@ -25,19 +26,15 @@
 
 <h3 id="3-git-config-配置"><strong>3. git config 配置</strong></h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>git config --global user.name shining
-git config --global user.email shining@achang.com 
-git config --list
-</code></pre>
-</div>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="n">global</span> <span class="n">user</span><span class="p">.</span><span class="nf">name</span> <span class="n">shining</span>
+<span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="n">global</span> <span class="n">user</span><span class="p">.</span><span class="nf">email</span> <span class="n">shining</span><span class="vi">@achang</span><span class="p">.</span><span class="nf">com</span> 
+<span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="n">list</span></code></pre></figure>
 
 <p><img src="/blog/img/2017-3-30/2.png" alt="git install" /></p>
 
 <h3 id="4-生成ssh-key"><strong>4. 生成SSH key</strong></h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>ssh-keygen -t rsa -C "shining@achang.com"
-</code></pre>
-</div>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span> <span class="o">-</span><span class="n">t</span> <span class="n">rsa</span> <span class="o">-</span><span class="no">C</span> <span class="s2">"shining@achang.com"</span></code></pre></figure>
 
 <p><img src="/blog/img/2017-3-30/3.png" alt="git install" /></p>
 
@@ -55,16 +52,12 @@ git config --list
 
 <h3 id="2-打开终端生成ssh-key"><strong>2. 打开终端，生成SSH key</strong></h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>cd ~/.ssh
-ssh-keygen -t rsa -C jonezhang86@gmail.com
-</code></pre>
-</div>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">cd</span> <span class="o">~</span><span class="sr">/.ssh
+ssh-keygen -t rsa -C jonezhang86@gmail.com</span></code></pre></figure>
 
 <h3 id="3-copy-ssh-key"><strong>3. copy SSh key</strong></h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>vim id_rsa.pub
-</code></pre>
-</div>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">vim</span> <span class="n">id_rsa</span><span class="p">.</span><span class="nf">pub</span></code></pre></figure>
 
 
 	</div>

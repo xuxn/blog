@@ -1,3 +1,4 @@
 baseurl: /blog
 timezone: Asia/Shanghai
 permalink: /:categories/:year/:month/:title.html
+ 

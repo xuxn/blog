@@ -18,19 +18,19 @@ date:   2017-01-19 17:41:04 +0800
 
 ### **3. git config 配置**
 
-```
+{% highlight ruby %}
 git config --global user.name shining
 git config --global user.email shining@achang.com 
 git config --list
-```
+{% endhighlight %}
 
 ![git install](/blog/img/2017-3-30/2.png)
 
 ### **4. 生成SSH key**
 
-```
+{% highlight ruby %}
 ssh-keygen -t rsa -C "shining@achang.com"
-```
+{% endhighlight %}
 
 ![git install](/blog/img/2017-3-30/3.png)
 
@@ -49,14 +49,14 @@ ssh-keygen -t rsa -C "shining@achang.com"
 
 ### **2. 打开终端，生成SSH key**
 
-```
+{% highlight ruby %}
 cd ~/.ssh
 ssh-keygen -t rsa -C jonezhang86@gmail.com
-```
+{% endhighlight %}
 
 ### **3. copy SSh key**
 
-```
+{% highlight ruby %}
 vim id_rsa.pub
-```
+{% endhighlight %}
 

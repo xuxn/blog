@@ -9,9 +9,9 @@ date:   2017-01-19 17:41:04 +0800
 
 ### **1. 创建github对应的sshkey**
 
-```
+{% highlight ruby %}
 ssh-keygen -t rsa -C email
-```
+{% endhighlight %}
 
 ### **2. 创建github对应的sshkey，命名为id_rsa_oschina，密码 123456** 
 
