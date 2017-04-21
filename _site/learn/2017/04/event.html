@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Elaine blog</title>
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<link rel="stylesheet" href="/blog/css/style.css">
+	<link rel="stylesheet" href="/blog/css/highlight.css">
+</head>
+<body>
+<header>
+  <h1>Elaine <span>Blog<span></h1>
+</header>     
+<section class="container">
+	<div class="arc-con">
+		
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&lt;</span><span class="n">div</span> <span class="nb">id</span><span class="o">=</span><span class="s2">"outer"</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nb">p</span> <span class="nb">id</span><span class="o">=</span><span class="s2">"inner"</span><span class="o">&gt;</span><span class="no">Click</span> <span class="n">me!</span><span class="o">&lt;</span><span class="sr">/p&gt;
+&lt;/</span><span class="n">div</span><span class="o">&gt;</span> </code></pre></figure>
+
+<p>上面的代码当中一个div元素当中有一个p子元素，如果两个元素都有一个click的处理函数，那么我们怎么才能知道哪一个函数会首先被触发呢？为了解决这个问题微软和网景提出了两种几乎完全相反的概念</p>
+
+<h3 id="1-事件冒泡">1. 事件冒泡</h3>
+<p>事件冒泡就像鱼吐泡泡一样，从水下向水面走，也就是说，事件会从最内层的元素开始发生，一直向上传播，直到document对象。
+因此在事件冒泡的概念下在p元素上发生click事件的顺序应该是p -&gt; div -&gt; body -&gt; html -&gt; document</p>
+
+<h3 id="2-事件捕获">2. 事件捕获</h3>
+
+<p>事件捕获就好像一块石头从水面向水下沉一样，如果这一层有事件处理器，就触发，没有就继续向下沉，到下层再查看是否有事件处理器，有的话就触发，没有的话继续向下，一直到最底层，这个石头就停止了。</p>
+
+<p>因此在事件捕获的概念下在p元素上发生click事件的顺序应该是document -&gt; html -&gt; body -&gt; div -&gt; p</p>
+
+<p>这样的两种事件流处理方式，也导致了浏览器兼容性的问题，开发者开发的同一个网页，在不同的浏览器上却会产生不同的效果。为了解决这个问题，DOM 2级规范统一了事件流的过程，总共分为三个阶段：事件捕获、在目标元素上，事件冒泡。DOM 2级规范将事件捕获和事件冒泡都收入自己的囊中，所以你可以在一个元素上同时注册事件捕获和事件冒泡，也就是说你可以选择父级元素事件处理器后触发，也可以选择先触发，甚至可以选择先触发父级元素的捕获事件，再触发父级元素的冒泡事件。听上去似乎很复杂，那么 DOM 2 级规范到底如何实现这个效果的呢？</p>
+
+<h3 id="3-addeventlistener的第三个参数">3. addEventListener的第三个参数</h3>
+
+<p>后来 w3c 采用折中的方式，平息了战火，制定了统一的标准——<strong>先捕获再冒泡</strong>。</p>
+
+<p>DOM 2级规范在所有的 HTML 元素上都定义了两个方法： addEventListener() 和 removeEventListener()。</p>
+
+<p>这两个方法都接收三个参数：事件名称、事件处理器函数和一个布尔值。</p>
+
+<p>第三个参数默认值是false，表示在事件冒泡阶段调用事件处理函数;如果参数为true，则表示在事件捕获阶段调用处理函数。</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">var</span> <span class="n">outer</span> <span class="o">=</span> <span class="n">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="s2">"outer"</span><span class="p">),</span>
+    <span class="n">inner</span> <span class="o">=</span> <span class="n">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="s2">"inner"</span><span class="p">);</span> 
+
+<span class="sr">//</span><span class="err">情况一：点击</span> <span class="n">inner</span> <span class="err">的时候，会先弹出</span> <span class="n">inner</span><span class="err">，后弹出</span> <span class="n">outer</span>
+<span class="n">outer</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="n">outHandler</span><span class="p">,</span><span class="kp">false</span><span class="p">);</span>
+<span class="n">inner</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="n">innerHandler</span><span class="p">,</span><span class="kp">false</span><span class="p">);</span>
+
+<span class="sr">//</span><span class="err">情况二：点击</span> <span class="n">inner</span> <span class="err">的时候，会先弹出</span> <span class="n">outer</span><span class="err">，后弹出</span> <span class="n">inner</span>
+<span class="n">outer</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="n">outHandler</span><span class="p">,</span><span class="kp">true</span><span class="p">);</span>
+<span class="n">inner</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="n">innerHandler</span><span class="p">,</span><span class="kp">true</span><span class="p">);</span></code></pre></figure>
+
+<p>如果事件处理器不是通过 DOM 2 级规范的方式添加的，是通过 DOM 0 级规范添加的，那是事件捕获还是事件冒泡呢？</p>
+
+<p>根据 DOM 0 级规范，这种添加事件处理器的方式会在冒泡阶段触发事件处理器</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">var</span> <span class="n">outer</span> <span class="o">=</span> <span class="n">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="s2">"outer"</span><span class="p">),</span>
+    <span class="n">inner</span> <span class="o">=</span> <span class="n">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="s2">"inner"</span><span class="p">);</span>
+
+<span class="n">var</span> <span class="n">outHandler</span> <span class="o">=</span> <span class="n">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">alert</span><span class="p">(</span><span class="s2">"outer"</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="n">var</span> <span class="n">innerHandler</span> <span class="o">=</span> <span class="n">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">alert</span><span class="p">(</span><span class="s2">"inner"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">outer</span><span class="p">.</span><span class="nf">onclick</span> <span class="o">=</span> <span class="n">outHandler</span><span class="p">;</span>
+<span class="n">inner</span><span class="p">.</span><span class="nf">onclick</span> <span class="o">=</span> <span class="n">innerHandler</span><span class="p">;</span></code></pre></figure>
+
+<h3 id="4-事件捕获vs事件冒泡">4. 事件捕获vs事件冒泡</h3>
+
+<p>在处理事件代理的时候，事件 event 有两个比较特殊的属性，event.target 和 event.currentTarget，这两个属性又有什么区别呢？</p>
+
+<p>event.target 是<strong>触发事件的元素</strong>，而 event.currentTarget 是<strong>事件绑定的元素</strong>。也就是说，大部分情况下，当使用事件代理时，event.target 是子元素，而 event.currentTarget 是父级元素。</p>
+
+<p>对于大多数情况，一个 HTML 元素只需要注册一个事件，但是有时候，一些 HTML 元素需要注册两个及以上的事件，而且很有可能，一个元素既需要在捕获阶段注册事件，又需要在冒泡阶段注册事件。这种情况又该如何处理呢？</p>
+
+<p>首先，如果想要在一个 HTML 元素上同时注册两个事件，必须用 DOM 2级规范的方式来进行事件注册，而不能用 DOM 0 级规范的方式，因为 DOM 0 级规范的方式添加两个事件的话，后面的事件处理器会覆盖前面的事件处理器，也就是说 DOM 0级的方式无论怎么处理，都只能触发一个事件处理器。但是 DOM 2级规范的方式则不同，可以在一个元素上添加多个事件处理器，而且这多个事件处理器还可以按照捕获和冒泡不同阶段添加。也就是说可以在捕获阶段添加多个事件处理器，也可以同时在冒泡阶段添加多个事件处理器。</p>
+
+<p>这里记被点击的DOM节点为target节点</p>
+
+<ul>
+  <li>document 往 target节点，捕获前进，遇到注册的捕获事件立即触发执行</li>
+  <li>到达target节点，触发事件（对于target节点上，是先捕获还是先冒泡则捕获事件和冒泡事件的注册顺序，先注册先执行）</li>
+  <li>target节点 往 document 方向，冒泡前进，遇到注册的冒泡事件立即触发</li>
+</ul>
+
+<p>总结为</p>
+
+<ul>
+  <li>对于非target节点则先执行捕获在执行冒泡</li>
+  <li>对于target节点则是先执行先注册的事件，无论冒泡还是捕获</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&lt;</span><span class="n">div</span> <span class="nb">id</span><span class="o">=</span><span class="s2">"s1"</span><span class="o">&gt;</span><span class="n">s1</span>
+    <span class="o">&lt;</span><span class="n">div</span> <span class="nb">id</span><span class="o">=</span><span class="s2">"s2"</span><span class="o">&gt;</span><span class="n">s2</span><span class="o">&lt;</span><span class="sr">/div&gt;
+&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">script</span><span class="o">&gt;</span>
+<span class="n">s1</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="n">function</span><span class="p">(</span><span class="n">e</span><span class="p">){</span>
+    <span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">"s1 冒泡事件"</span><span class="p">);</span>         
+<span class="p">},</span><span class="kp">false</span><span class="p">);</span>
+<span class="n">s2</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="n">function</span><span class="p">(</span><span class="n">e</span><span class="p">){</span>
+    <span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">"s2 冒泡事件"</span><span class="p">);</span>
+<span class="p">},</span><span class="kp">false</span><span class="p">);</span>
+
+<span class="n">s1</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="n">function</span><span class="p">(</span><span class="n">e</span><span class="p">){</span>
+    <span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">"s1 捕获事件"</span><span class="p">);</span>
+<span class="p">},</span><span class="kp">true</span><span class="p">);</span>
+
+<span class="n">s2</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="n">function</span><span class="p">(</span><span class="n">e</span><span class="p">){</span>
+    <span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">"s2 捕获事件"</span><span class="p">);</span>
+<span class="p">},</span><span class="kp">true</span><span class="p">);</span>
+<span class="sr">//</span><span class="err">当我们点击</span><span class="n">s2</span><span class="err">的时候，执行顺序是</span> <span class="s2">"s1 捕获事件"</span> <span class="o">=&gt;</span> <span class="s2">"s2 冒泡事件"</span> <span class="o">=&gt;</span> <span class="s2">"s2 捕获事件"</span> <span class="o">=&gt;</span> <span class="s2">"s1 冒泡事件"</span>
+<span class="o">&lt;</span><span class="sr">/script&gt;</span></code></pre></figure>
+
+<h3 id="5-事件冒泡与事件捕获应用事件代理">5. 事件冒泡与事件捕获应用:事件代理</h3>
+
+<p>在实际的开发当中，利用事件流的特性，我们可以使用一种叫做事件代理的方法。</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&lt;</span><span class="n">ul</span> <span class="nb">id</span><span class="o">=</span><span class="s2">"color-list"</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="n">red</span><span class="o">&lt;</span><span class="sr">/li&gt;
+    &lt;li&gt;yellow&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="n">blue</span><span class="o">&lt;</span><span class="sr">/li&gt;
+    &lt;li&gt;green&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="n">black</span><span class="o">&lt;</span><span class="sr">/li&gt;
+    &lt;li&gt;white&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="sr">/ul&gt;</span></code></pre></figure>
+
+<p>如果点击页面中的li元素，然后输出li当中的颜色，我们通常会这样写:</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="p">(</span><span class="n">function</span><span class="p">(){</span>
+    <span class="n">var</span> <span class="n">color_list</span> <span class="o">=</span> <span class="n">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="s1">'color-list'</span><span class="p">);</span>
+    <span class="n">var</span> <span class="n">colors</span> <span class="o">=</span> <span class="n">color_list</span><span class="p">.</span><span class="nf">getElementsByTagName</span><span class="p">(</span><span class="s1">'li'</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">var</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">colors</span><span class="p">.</span><span class="nf">length</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>                          
+        <span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="n">showColor</span><span class="p">,</span><span class="kp">false</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="n">function</span> <span class="n">showColor</span><span class="p">(</span><span class="n">e</span><span class="p">){</span>
+        <span class="n">var</span> <span class="n">x</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="nf">target</span><span class="p">;</span>
+        <span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">"The color is "</span> <span class="o">+</span> <span class="n">x</span><span class="p">.</span><span class="nf">innerHTML</span><span class="p">);</span>
+    <span class="p">};</span>
+<span class="p">})();</span></code></pre></figure>
+
+<p>利用事件流的特性，我们只绑定一个事件处理函数也可以完成：</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="p">(</span><span class="n">function</span><span class="p">(){</span>
+    <span class="n">var</span> <span class="n">color_list</span> <span class="o">=</span> <span class="n">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="s1">'color-list'</span><span class="p">);</span>
+    <span class="n">color_list</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="n">showColor</span><span class="p">,</span><span class="kp">false</span><span class="p">);</span>
+    <span class="n">function</span> <span class="n">showColor</span><span class="p">(</span><span class="n">e</span><span class="p">){</span>
+        <span class="n">var</span> <span class="n">x</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="nf">target</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="nf">nodeName</span><span class="p">.</span><span class="nf">toLowerCase</span><span class="p">()</span> <span class="o">===</span> <span class="s1">'li'</span><span class="p">){</span>
+            <span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s1">'The color is '</span> <span class="o">+</span> <span class="n">x</span><span class="p">.</span><span class="nf">innerHTML</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">})();</span></code></pre></figure>
+
+<p>当点击li的时候，并无绑定事件，冒泡向上查找到父元素color_list，执行其绑定的事件</p>
+
+<p>使用事件代理的好处不仅在于将多个事件处理函数减为一个，而且对于不同的元素可以有不同的处理方法。假如上述列表元素当中添加了其他的元素（如：a、span等），我们不必再一次循环给每一个元素绑定事件，直接修改事件代理的事件处理函数即可。</p>
+
+<h3 id="6-冒泡还是捕获">6. 冒泡还是捕获？</h3>
+
+<p>对于事件代理来说，在事件捕获或者事件冒泡阶段处理并没有明显的优劣之分，但是由于事件冒泡的事件流模型被所有主流的浏览器兼容，从兼容性角度来说还是建议大家使用事件冒泡模型。</p>
+
+<p>要兼容旧版本的IE浏览器，可以使用IE的attachEvent函数</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">object</span><span class="p">.</span><span class="nf">attachEvent</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">function</span><span class="p">)</span></code></pre></figure>
+
+<p>两个参数与addEventListener相似，分别是事件和处理函数，默认是事件冒泡阶段调用处理函数，要注意的是，写事件名时候要加上”on”前缀（”onload”、”onclick”等）。</p>
+
+	</div>
+</section>   
+<footer>
+	<p>Copyright &copy; 2017@Elaine Blog / All rights reserved.</p>
+</footer>

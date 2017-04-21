@@ -17,6 +17,45 @@
 <ul class="arc-list">
     
         <li>
+          <h2 class="arc-title"><a href="/blog/learn/2017/04/regexp.html">正则表达式</a></h2>
+          <p class="arc-date">2017-04-20 </p>
+          <p class="arc-con">正则表达式
+
+1. 定义正则表达式
+
+通过构造函数
+
+第一个参数为正则表达式的文本内容，第二个参数表示匹配g（全文查找），i（忽略大小写） ，m（多行查找）
+
+var re = new RegExp();//RegExp是一个对象,和Aarray一样  
+//但这样没有任何效果,需要将正则表达式的内容作为字符串传递进去  
+re =new RegExp("a");//最简单的正则表达式,将匹配字母a  
+re=new RegExp("a","i");//第二个参数,表示匹配时不分大小写  
+
+通过//，也就是两个斜杠
+
+2. 正则表达式对象的常用属性和方法
+
+
+  test返回一个 Bo...<a href="/blog/learn/2017/04/regexp.html" class="more">Read More</a></p>
+        </li>
+    
+        <li>
+          <h2 class="arc-title"><a href="/blog/learn/2017/04/event.html">事件冒泡和事件捕获</a></h2>
+          <p class="arc-date">2017-04-20 </p>
+          <p class="arc-con">
+&lt;div id="outer"&gt;
+    &lt;p id="inner"&gt;Click me!&lt;/p&gt;
+&lt;/div&gt; 
+
+上面的代码当中一个div元素当中有一个p子元素，如果两个元素都有一个click的处理函数，那么我们怎么才能知道哪一个函数会首先被触发呢？为了解决这个问题微软和网景提出了两种几乎完全相反的概念
+
+1. 事件冒泡
+事件冒泡就像鱼吐泡泡一样，从水下向水面走，也就是说，事件会从最内层的元素开始发生，一直向上传播，直到document对象。
+因此在事件冒泡的概念下在p元素上发生click事件的顺序应该是p -&gt; div -&gt...<a href="/blog/learn/2017/04/event.html" class="more">Read More</a></p>
+        </li>
+    
+        <li>
           <h2 class="arc-title"><a href="/blog/learn/2017/01/gitbook.html">gitbook的安装</a></h2>
           <p class="arc-date">2017-01-19 </p>
           <p class="arc-con">gitbook的安装
