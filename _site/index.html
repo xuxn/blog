@@ -17,6 +17,58 @@
 <ul class="arc-list">
     
         <li>
+          <h2 class="arc-title"><a href="/blog/learn/2017/04/queue.html">队列控制方法queue()/dequeue()/clearQueue()</a></h2>
+          <p class="arc-date">2017-04-24 </p>
+          <p class="arc-con">队列控制方法queue()/dequeue()/clearQueue()
+
+jQuery核心中，有一组队列控制方法, 这组方法由queue()/dequeue()/clearQueue()三个方法组成，它对需要连续按序执行的函数的控制可以说是简明自如, 主要应用于animate ()方法，ajax以及其他要按时间顺序执行的事件中。
+
+queue(name,[callback])
+
+
+  当只传入一个参数时, 它返回并指向第一个匹配元素的队列(将是一个函数数组,队列名默认是fx);
+  当有两个参数传入时, 第一个参数还是默认为fx的的队列名, 第二个参数又分两种情况, 当第二个参数是一个...<a href="/blog/learn/2017/04/queue.html" class="more">Read More</a></p>
+        </li>
+    
+        <li>
+          <h2 class="arc-title"><a href="/blog/learn/2017/04/currentStyle.html">区别style、runtimeStyle、currentStyle、getComputedStyle</a></h2>
+          <p class="arc-date">2017-04-24 </p>
+          <p class="arc-con">区别style、runtimeStyle、currentStyle、getComputedStyle
+
+在JavaScript中，通过document.getElementById(id).style.XXX就可以获取到XXX的值，但是这样做只能取到通过内嵌方式设置的样式值，即style属性里面设置的值。
+
+style
+只能获取或修改内嵌样式增改top、left等，IE里直接写数值，Firefox等要加”px”
+
+语法：
+document.getElementById(id).style.XXX
+
+runtimeStyle
+
+运行时的样式，如果与style的属性重叠，将覆盖style的属...<a href="/blog/learn/2017/04/currentStyle.html" class="more">Read More</a></p>
+        </li>
+    
+        <li>
+          <h2 class="arc-title"><a href="/blog/learn/2017/04/arguments.html">Arguments</a></h2>
+          <p class="arc-date">2017-04-24 </p>
+          <p class="arc-con">Arguments
+
+argeuments特性
+
+1. 每个函数都有一个arguments属性，表示函数的实参集合，这里的实参是重点，就是执行函数时实际传入的参数的集合。
+
+2. arguments不是数组而是一个对象，但它和数组很相似，所以通常称为类数组对象，以后看到类数组其实就表示arguments。
+
+3. arguments有length属性，可以用arguments[length]显示调用。
+
+在js中 不需要明确指出参数名，就能访问它们，例如：
+
+function test() {
+        var s = "";
+        for (var i = 0; i &...<a href="/blog/learn/2017/04/arguments.html" class="more">Read More</a></p>
+        </li>
+    
+        <li>
           <h2 class="arc-title"><a href="/blog/learn/2017/04/regexp.html">正则表达式</a></h2>
           <p class="arc-date">2017-04-20 </p>
           <p class="arc-con">正则表达式

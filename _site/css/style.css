@@ -36,6 +36,9 @@ ul,li{
 	padding: 0;
 	list-style-type: none;
 }
+ol,ol li{
+	list-style:inside decimal;
+}
 header{
 	width:100%;
 	height: 300px;

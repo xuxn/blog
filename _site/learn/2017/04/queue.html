@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Elaine blog</title>
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<link rel="stylesheet" href="/blog/css/style.css">
+	<link rel="stylesheet" href="/blog/css/highlight.css">
+</head>
+<body>
+<header>
+  <h1>Elaine <span>Blog<span></h1>
+</header>     
+<section class="container">
+	<div class="arc-con">
+		<h1 id="队列控制方法queuedequeueclearqueue">队列控制方法queue()/dequeue()/clearQueue()</h1>
+
+<p>jQuery核心中，有一组队列控制方法, 这组方法由queue()/dequeue()/clearQueue()三个方法组成，它对需要<strong>连续按序执行的函数</strong>的控制可以说是简明自如, 主要应用于animate ()方法，ajax以及其他要按时间顺序执行的事件中。</p>
+
+<h3 id="queuenamecallback"><strong>queue(name,[callback])</strong></h3>
+
+<ol>
+  <li>当只传入一个参数时, 它返回并指向第一个匹配元素的队列(将是一个函数数组,队列名默认是fx);</li>
+  <li>当有两个参数传入时, 第一个参数还是默认为fx的的队列名, 第二个参数又分两种情况, 当第二个参数是一个函数时, 它将在匹配的元素的队列最后添加一个函数. 当第二个参数是一个函数数组时,它将匹配元素的队列用新的一个队列来代替(函数数组)。</li>
+</ol>
+
+<h3 id="dequeuename"><strong>dequeue(name)</strong></h3>
+
+<p>从队列最前端移除一个队列函数, 并执行它。</p>
+
+<h3 id="clearqueuequeuename"><strong>clearQueue([queueName])</strong></h3>
+
+<p>清空对象上尚未执行的所有队列. 参数可选,默认为fx。</p>
+
+<p>停止按钮调用的就是clearQueue()方法，当然你还可以用queue()方法直接将现在的<strong>函数列队</strong>(即一个定义的数组对象)替换成[]空数组实现</p>
+
+<h3 id="实例分析"><strong>实例分析</strong></h3>
+
+<p>要求有七个方块自左到右依次下落</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="err">$</span><span class="p">(</span><span class="s1">'.one'</span><span class="p">).</span><span class="nf">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nf">animate</span><span class="p">({</span><span class="n">top</span><span class="ss">:'+=270px'</span><span class="p">},</span><span class="mi">500</span><span class="p">,</span><span class="n">function</span><span class="p">(){</span>
+        <span class="err">$</span><span class="p">(</span><span class="s1">'.two'</span><span class="p">).</span><span class="nf">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nf">animate</span><span class="p">({</span><span class="n">top</span><span class="ss">:'+=270px'</span><span class="p">},</span><span class="mi">500</span><span class="p">,</span><span class="n">function</span><span class="p">(){</span>
+            <span class="err">$</span><span class="p">(</span><span class="s1">'.three'</span><span class="p">).</span><span class="nf">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nf">animate</span><span class="p">({</span><span class="n">top</span><span class="ss">:'+=270px'</span><span class="p">},</span><span class="mi">500</span><span class="p">,</span><span class="n">function</span><span class="p">(){</span>
+                <span class="err">$</span><span class="p">(</span><span class="s1">'.four'</span><span class="p">).</span><span class="nf">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nf">animate</span><span class="p">({</span><span class="n">top</span><span class="ss">:'+=270px'</span><span class="p">},</span><span class="mi">500</span><span class="p">,</span><span class="n">function</span><span class="p">(){</span>
+                    <span class="err">$</span><span class="p">(</span><span class="s1">'.five'</span><span class="p">).</span><span class="nf">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nf">animate</span><span class="p">({</span><span class="n">top</span><span class="ss">:'+=270px'</span><span class="p">},</span><span class="mi">500</span><span class="p">,</span><span class="n">function</span><span class="p">(){</span>
+                        <span class="err">$</span><span class="p">(</span><span class="s1">'.six'</span><span class="p">).</span><span class="nf">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nf">animate</span><span class="p">({</span><span class="n">top</span><span class="ss">:'+=270px'</span><span class="p">},</span><span class="mi">500</span><span class="p">,</span><span class="n">function</span><span class="p">(){</span>
+                            <span class="err">$</span><span class="p">(</span><span class="s1">'.seven'</span><span class="p">).</span><span class="nf">animate</span><span class="p">({</span><span class="n">top</span><span class="ss">:'+=270px'</span><span class="p">},</span><span class="mi">500</span><span class="p">,</span><span class="n">function</span><span class="p">(){</span>
+                                <span class="n">alert</span><span class="p">(</span><span class="s1">'按序落体运动结束! Yeah!'</span><span class="p">)</span>
+                            <span class="p">});</span>
+                        <span class="p">});</span>
+                    <span class="p">});</span>
+                <span class="p">});</span>
+            <span class="p">});</span>
+        <span class="p">});</span>
+    <span class="p">});</span></code></pre></figure>
+
+<p>如果此时, 你想调换一个某个的执行顺序, 比如, 你想让5落下后再开始下落3, 或者新加8至15八个方块, 怎么办?  显然, 我们需要另外一种列简明便捷的方法来实现这个效果, 那就是jQuery队列控制方法。</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">var</span> <span class="n">_slideFun</span><span class="o">=</span><span class="p">[</span>
+    <span class="n">function</span><span class="p">(){</span><span class="err">$</span><span class="p">(</span><span class="s1">'.one'</span><span class="p">).</span><span class="nf">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nf">animate</span><span class="p">({</span><span class="n">top</span><span class="ss">:'+=270px'</span><span class="p">},</span><span class="mi">500</span><span class="p">,</span><span class="n">_takeOne</span><span class="p">);},</span>
+    <span class="n">function</span><span class="p">(){</span><span class="err">$</span><span class="p">(</span><span class="s1">'.two'</span><span class="p">).</span><span class="nf">delay</span><span class="p">(</span><span class="mi">300</span><span class="p">).</span><span class="nf">animate</span><span class="p">({</span><span class="n">top</span><span class="ss">:'+=270px'</span><span class="p">},</span><span class="mi">500</span><span class="p">,</span><span class="n">_takeOne</span><span class="p">);},</span>
+    <span class="n">function</span><span class="p">(){</span><span class="err">$</span><span class="p">(</span><span class="s1">'.three'</span><span class="p">).</span><span class="nf">delay</span><span class="p">(</span><span class="mi">300</span><span class="p">).</span><span class="nf">animate</span><span class="p">({</span><span class="n">top</span><span class="ss">:'+=270px'</span><span class="p">},</span><span class="mi">500</span><span class="p">,</span><span class="n">_takeOne</span><span class="p">);},</span>
+    <span class="n">function</span><span class="p">(){</span><span class="err">$</span><span class="p">(</span><span class="s1">'.four'</span><span class="p">).</span><span class="nf">delay</span><span class="p">(</span><span class="mi">300</span><span class="p">).</span><span class="nf">animate</span><span class="p">({</span><span class="n">top</span><span class="ss">:'+=270px'</span><span class="p">},</span><span class="mi">500</span><span class="p">,</span><span class="n">_takeOne</span><span class="p">);},</span>
+    <span class="n">function</span><span class="p">(){</span><span class="err">$</span><span class="p">(</span><span class="s1">'.five'</span><span class="p">).</span><span class="nf">delay</span><span class="p">(</span><span class="mi">300</span><span class="p">).</span><span class="nf">animate</span><span class="p">({</span><span class="n">top</span><span class="ss">:'+=270px'</span><span class="p">},</span><span class="mi">500</span><span class="p">,</span><span class="n">_takeOne</span><span class="p">);},</span>
+    <span class="n">function</span><span class="p">(){</span><span class="err">$</span><span class="p">(</span><span class="s1">'.six'</span><span class="p">).</span><span class="nf">delay</span><span class="p">(</span><span class="mi">300</span><span class="p">).</span><span class="nf">animate</span><span class="p">({</span><span class="n">top</span><span class="ss">:'+=270px'</span><span class="p">},</span><span class="mi">500</span><span class="p">,</span><span class="n">_takeOne</span><span class="p">);},</span>
+    <span class="n">function</span><span class="p">(){</span><span class="err">$</span><span class="p">(</span><span class="s1">'.seven'</span><span class="p">).</span><span class="nf">delay</span><span class="p">(</span><span class="mi">300</span><span class="p">).</span><span class="nf">animate</span><span class="p">({</span><span class="n">top</span><span class="ss">:'+=270px'</span><span class="p">},</span><span class="mi">500</span><span class="p">,</span><span class="n">function</span><span class="p">(){</span>
+        <span class="n">alert</span><span class="p">(</span><span class="s1">'按序落体运动结束! Yeah!'</span><span class="p">);</span>
+    <span class="p">});}</span>
+<span class="p">];</span>
+<span class="err">$</span><span class="p">(</span><span class="s1">'#demo'</span><span class="p">).</span><span class="nf">queue</span><span class="p">(</span><span class="s1">'slideList'</span><span class="p">,</span><span class="n">_slideFun</span><span class="p">);</span>
+<span class="n">var</span> <span class="n">_takeOne</span><span class="o">=</span><span class="n">function</span><span class="p">(){</span>
+    <span class="err">$</span><span class="p">(</span><span class="s1">'#demo'</span><span class="p">).</span><span class="nf">dequeue</span><span class="p">(</span><span class="s1">'slideList'</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="n">_takeOne</span><span class="p">();</span></code></pre></figure>
+
+<ol>
+  <li>新建一个数组,把动画函数依次放进去(这样更改顺序,新加动画是不是方便多了?);</li>
+  <li>用queue将这组动画函数数组加入到slideList队列中;</li>
+  <li>用dequeue取出slideList队列中第一个函数, 并执行它;</li>
+  <li>初始执行第一个函数.</li>
+</ol>
+
+	</div>
+</section>   
+<footer>
+	<p>Copyright &copy; 2017@Elaine Blog / All rights reserved.</p>
+</footer>

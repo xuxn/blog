@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Elaine blog</title>
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<link rel="stylesheet" href="/blog/css/style.css">
+	<link rel="stylesheet" href="/blog/css/highlight.css">
+</head>
+<body>
+<header>
+  <h1>Elaine <span>Blog<span></h1>
+</header>     
+<section class="container">
+	<div class="arc-con">
+		<h1 id="arguments">Arguments</h1>
+
+<h3 id="argeuments特性"><strong>argeuments特性</strong></h3>
+
+<p><strong>1. 每个函数都有一个arguments属性，表示函数的实参集合，这里的实参是重点，就是执行函数时实际传入的参数的集合。</strong></p>
+
+<p><strong>2. arguments不是数组而是一个对象，但它和数组很相似，所以通常称为类数组对象，以后看到类数组其实就表示arguments。</strong></p>
+
+<p><strong>3. arguments有length属性，可以用arguments[length]显示调用。</strong></p>
+
+<p>在js中 不需要明确指出参数名，就能访问它们，例如：</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">function</span> <span class="nb">test</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">var</span> <span class="n">s</span> <span class="o">=</span> <span class="s2">""</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">var</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">arguments</span><span class="p">.</span><span class="nf">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">alert</span><span class="p">(</span><span class="n">arguments</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="n">arguments</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="s2">","</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="nb">test</span><span class="p">(</span><span class="s2">"name"</span><span class="p">,</span> <span class="s2">"age"</span><span class="p">)</span>
+
+<span class="err">输出结果：</span>
+
+<span class="nb">name</span><span class="p">,</span><span class="n">age</span></code></pre></figure>
+
+<h3 id="arrayprototypeslicecallarguments"><strong>Array.prototype.slice.call(arguments)</strong></h3>
+
+<p><strong>call的作用—-可以改变函数运行的作用域</strong></p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">var</span> <span class="n">obj1</span><span class="o">=</span><span class="p">{</span>
+	<span class="nb">name</span><span class="ss">:"java"</span>
+<span class="p">}</span> 
+<span class="n">window</span><span class="p">.</span><span class="nf">name</span><span class="o">=</span><span class="s2">"javascript"</span><span class="p">;</span>
+	<span class="n">var</span> <span class="n">func</span><span class="o">=</span><span class="n">function</span><span class="p">(){</span>
+	<span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="nf">name</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">func</span><span class="p">();</span>  <span class="sr">//</span><span class="n">javasript</span>
+<span class="n">func</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="n">obj1</span><span class="p">);</span> <span class="sr">//</span><span class="n">java</span></code></pre></figure>
+
+<p>那么首先我们猜测Array.prototype.slice是一个方法，将它call(arguments)之后，Array.prototype.slice中的this就指向了arguments对象了</p>
+
+<p><strong>Array.slice是一个数组复制函数，接受两个参数(strat,[end])，从下标为start复制到下标为end</strong></p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">var</span> <span class="n">numArr</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">];</span>
+<span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="n">numArr</span><span class="p">.</span><span class="nf">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">));</span> <span class="sr">//</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="n">numArr</span><span class="p">.</span><span class="nf">slice</span><span class="p">());</span> <span class="sr">//</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="n">numArr</span><span class="p">.</span><span class="nf">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="o">/</span><span class="sr">/[2,3,4,5]</span></code></pre></figure>
+
+<p>slice函数的内部实现</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Array</span><span class="p">.</span><span class="nf">prototype</span><span class="p">.</span><span class="nf">slice</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="k">end</span><span class="p">){</span>
+       <span class="n">var</span> <span class="n">result</span> <span class="o">=</span> <span class="kp">new</span> <span class="no">Array</span><span class="p">();</span>
+       <span class="n">start</span> <span class="o">=</span> <span class="n">start</span> <span class="o">||</span> <span class="mi">0</span><span class="p">;</span>
+       <span class="k">end</span> <span class="o">=</span> <span class="k">end</span> <span class="o">||</span> <span class="n">this</span><span class="p">.</span><span class="nf">length</span><span class="p">;</span> <span class="sr">//</span><span class="n">this</span><span class="err">指向调用的对象，当用了</span><span class="n">call</span><span class="err">后，能够改变</span><span class="n">this</span><span class="err">的指向，也就是指向传进来的对象，这是关键</span>
+       <span class="k">for</span><span class="p">(</span><span class="n">var</span> <span class="n">i</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="k">end</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">result</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="n">this</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+       <span class="p">}</span>
+       <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>注意当中的result.push(this[i]),当Array.prototype.slice.call(arguments)后，就变成了result.push(arguments[i])，这样就将arguments转成了一个实实在在的数组了。</p>
+
+<h3 id="callee属性返回正被执行的-function-对象也就是所指定的-function-对象的正文callee-属性是-arguments-对象的一个成员仅当相关函数正在执行时才可用"><strong>callee属性，返回正被执行的 Function 对象，也就是所指定的 Function 对象的正文，callee 属性是 arguments 对象的一个成员，仅当相关函数正在执行时才可用。</strong></h3>
+
+<p>callee 属性的初始值就是正被执行的 Function 对象，这允许匿名的递归函数。</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">var</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">function</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+       <span class="k">if</span> <span class="p">(</span><span class="mi">1</span> <span class="o">==</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+       <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+       <span class="k">return</span> <span class="n">n</span> <span class="o">+</span> <span class="n">arguments</span><span class="p">.</span><span class="nf">callee</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">alert</span><span class="p">(</span><span class="n">sum</span><span class="p">(</span><span class="mi">6</span><span class="p">));</span></code></pre></figure>
+
+<h3 id="一个给对象添加属性的函数"><strong>一个给对象添加属性的函数</strong></h3>
+
+<p>思考一下：首先得传入一个实参，这个实参是要被添加属性的对象。</p>
+
+<p>剩下的参数是属性键值对，可以用对象表示：</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">var</span> <span class="n">obj</span><span class="o">=</span><span class="p">{};</span><span class="sr">//</span><span class="err">先看执行函数</span>
+<span class="n">function</span> <span class="n">addProp</span><span class="p">(){</span>
+     <span class="n">var</span> <span class="n">obj</span><span class="o">=</span><span class="p">[].</span><span class="nf">shift</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="n">arguments</span><span class="p">);</span>   <span class="sr">//s</span><span class="n">hift</span><span class="p">()</span><span class="err">函数是将数组的第一个值删除，并返回</span><span class="p">,</span><span class="err">这里是得到</span><span class="n">obj</span>
+     <span class="n">var</span> <span class="n">propArray</span><span class="o">=</span><span class="p">[].</span><span class="nf">slice</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="n">arguments</span><span class="p">);</span> <span class="sr">//</span><span class="err">此时的</span><span class="n">argument</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="err">已被删除，所以就剩下</span><span class="n">propArray</span><span class="o">=</span><span class="p">[{</span><span class="nb">name</span><span class="ss">:"gao"</span><span class="p">,</span><span class="n">age</span><span class="ss">:"18"</span><span class="p">}{</span><span class="n">setName</span><span class="ss">:function</span><span class="p">(</span><span class="nb">name</span><span class="p">){</span><span class="n">this</span><span class="p">.</span><span class="nf">name</span><span class="o">=</span><span class="nb">name</span><span class="p">;}]</span>
+     <span class="k">for</span><span class="p">(</span><span class="n">var</span> <span class="n">i</span> <span class="k">in</span> <span class="n">propArray</span><span class="p">){</span>
+      <span class="sr">//</span><span class="n">prop</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="nb">name</span><span class="ss">:"gao"</span><span class="p">,</span><span class="n">age</span><span class="ss">:"18"</span><span class="p">}</span>
+      <span class="sr">//</span><span class="n">prop</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="n">setName</span><span class="ss">:function</span><span class="p">(</span><span class="nb">name</span><span class="p">){</span><span class="n">this</span><span class="p">.</span><span class="nf">name</span><span class="o">=</span><span class="nb">name</span><span class="p">;}</span>
+        <span class="k">for</span><span class="p">(</span><span class="n">var</span> <span class="n">j</span> <span class="k">in</span> <span class="n">propArray</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span>
+             <span class="n">obj</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">propArray</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+            <span class="sr">//o</span><span class="n">bj</span><span class="p">[</span><span class="nb">name</span><span class="p">]</span><span class="o">=</span><span class="s2">"gao"</span>
+             <span class="sr">//o</span><span class="n">bj</span><span class="p">[</span><span class="n">age</span><span class="p">]</span><span class="o">=</span><span class="s2">"18"</span>
+             <span class="sr">//o</span><span class="n">bj</span><span class="p">[</span><span class="n">setName</span><span class="p">]</span><span class="o">=</span><span class="n">function</span><span class="p">(</span><span class="nb">name</span><span class="p">){</span><span class="n">this</span><span class="p">.</span><span class="nf">name</span><span class="o">=</span><span class="nb">name</span><span class="p">;}</span>
+        <span class="p">}</span>
+     <span class="p">}</span>
+<span class="p">}</span>
+ 
+<span class="sr">//</span><span class="err">执行函数</span>
+<span class="n">addProp</span><span class="p">(</span><span class="n">obj</span><span class="p">,{</span><span class="nb">name</span><span class="ss">:"gao"</span><span class="p">,</span><span class="n">age</span><span class="ss">:"18"</span><span class="p">},{</span><span class="n">setName</span><span class="ss">:function</span><span class="p">(</span><span class="nb">name</span><span class="p">){</span>
+     <span class="n">this</span><span class="p">.</span><span class="nf">name</span><span class="o">=</span><span class="nb">name</span><span class="p">;</span>
+<span class="p">}});</span>
+<span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="n">obj</span><span class="p">.</span><span class="nf">name</span><span class="p">);</span>  <span class="sr">//</span><span class="n">gao</span>
+<span class="n">obj</span><span class="p">.</span><span class="nf">setName</span><span class="p">(</span><span class="s2">"xiang"</span><span class="p">);</span>
+<span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="n">obj</span><span class="p">.</span><span class="nf">name</span><span class="p">);</span>  <span class="sr">//xi</span><span class="n">ang</span></code></pre></figure>
+
+<hr />
+
+<p>通俗一点就是，arguments此对象大多用来针对同个方法多处调用并且传递参数个数不一样时进行使用，根据arguments的索引来判断执行的方法。</p>
+
+	</div>
+</section>   
+<footer>
+	<p>Copyright &copy; 2017@Elaine Blog / All rights reserved.</p>
+</footer>

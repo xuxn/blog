@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Elaine blog</title>
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<link rel="stylesheet" href="/blog/css/style.css">
+	<link rel="stylesheet" href="/blog/css/highlight.css">
+</head>
+<body>
+<header>
+  <h1>Elaine <span>Blog<span></h1>
+</header>     
+<section class="container">
+	<div class="arc-con">
+		<h1 id="区别styleruntimestylecurrentstylegetcomputedstyle">区别style、runtimeStyle、currentStyle、getComputedStyle</h1>
+
+<p>在JavaScript中，通过document.getElementById(id).style.XXX就可以获取到XXX的值，但是这样做只能取到通过内嵌方式设置的样式值，即style属性里面设置的值。</p>
+
+<h3 id="style"><strong>style</strong></h3>
+<p>只能获取或修改内嵌样式增改top、left等，IE里直接写数值，Firefox等要加”px”</p>
+
+<p>语法：
+document.getElementById(id).style.XXX</p>
+
+<h3 id="runtimestyle"><strong>runtimeStyle</strong></h3>
+
+<p>运行时的样式，如果与style的属性重叠，将覆盖style的属性</p>
+
+<p>runtimeStyle属性不是必需的，它的存在甚至远没有currentStyle有意义，因为由于IE布局、呈现原理限制，style属性里的定义，总有一些是无法和currentStyle同步的。什么意思呢？比如即使写上100个style=”height: 1px”，也是没有任何效果的。这时style的height虽然是1px，而currentStyle的height仍然是表格实际的高度。</p>
+
+<p>firefox不提供runtimeStyle和currentStyle</p>
+
+<p>语法：</p>
+
+<p>obj.runtimeStyle.att</p>
+
+<p>obj.runtimeStyle[att]</p>
+
+<h3 id="currentstyle"><strong>currentStyle</strong></h3>
+
+<p>currentStyle 指 style 和 runtimeStyle 的结合！ 通过currentStyle就可以获取到通过内联或外部引用的CSS样式的值了（仅限IE）</p>
+
+<p>语法：</p>
+
+<p>obj.currentStyle.att</p>
+
+<p>obj.currentStyle[att]</p>
+
+<h3 id="getcomputedstyle"><strong>getComputedStyle</strong></h3>
+
+<p>注意: getComputedStyle是firefox中的， currentStyle是ie中的</p>
+
+<p>语法：</p>
+
+<p>window.getComputedStyle(obj, pseudoElt)[att]</p>
+
+<p>window.getComputedStyle(obj, pseudoElt).att</p>
+
+<p>window.getComputedStyle(obj, pseudoElt).getPropertyValue(att)</p>
+
+<p>window.getComputedStyle(obj, pseudoElt).getPropertyCSSValue(att)</p>
+
+<p>document.defaultView.getComputedStyle(obj,pseudoElt)[att]</p>
+
+<p>document.defaultView.getComputedStyle(obj,pseudoElt).att</p>
+
+<p>document.defaultView.getComputedStyle(obj,pseudoElt).getPropertyValue(att)</p>
+
+<p>document.defaultView.getComputedStyle(obj,pseudoElt).getPropertyCSSValue(att)</p>
+
+<p>getComputedStyle的语法带上getPropertyValue或getPropertyCSSValue才算是标准，其中pseudoElt是指伪元素，如:after, :before, :marker, :line-marker之类的，如果不用伪类，则填null就可以了。</p>
+
+<p>getPropertyValue和getPropertyCSSValue的区别就是getPropertyValue返回的是一个string，而getPropertyCSSValue返回的是一个CSS2Properties对象</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">var</span> <span class="n">mydiv</span> <span class="o">=</span> <span class="n">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="s1">'mydiv'</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="n">mydiv</span><span class="p">.</span><span class="nf">currentStyle</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">var</span> <span class="n">width</span> <span class="o">=</span> <span class="n">mydiv</span><span class="p">.</span><span class="nf">currentStyle</span><span class="p">[</span><span class="s1">'width'</span><span class="p">];</span>
+      <span class="n">alert</span><span class="p">(</span><span class="s1">'ie:'</span> <span class="o">+</span> <span class="n">width</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">window</span><span class="p">.</span><span class="nf">getComputedStyle</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">var</span> <span class="n">width</span> <span class="o">=</span> <span class="n">window</span><span class="p">.</span><span class="nf">getComputedStyle</span><span class="p">(</span><span class="n">mydiv</span> <span class="p">,</span> <span class="n">null</span><span class="p">)[</span><span class="s1">'width'</span><span class="p">];</span>
+      <span class="n">alert</span><span class="p">(</span><span class="s1">'firefox:'</span> <span class="o">+</span> <span class="n">width</span><span class="p">);</span>
+<span class="p">}</span> </code></pre></figure>
+
+
+	</div>
+</section>   
+<footer>
+	<p>Copyright &copy; 2017@Elaine Blog / All rights reserved.</p>
+</footer>
