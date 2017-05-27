@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Elaine blog</title>
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<link rel="stylesheet" href="/blog/css/style.css">
+	<link rel="stylesheet" href="/blog/css/highlight.css">
+</head>
+<body>
+<header>
+  <h1>Elaine <span>Blog<span></h1>
+</header>     
+<section class="container">
+	<div class="arc-con">
+		<h1 id="js-自带的-map-方法">js 自带的 map() 方法</h1>
+
+<h3 id="方法概述"><strong>方法概述</strong></h3>
+
+<p>map() 方法返回一个由原数组中的每个元素调用一个指定方法后的返回值组成的新数组。</p>
+
+<h3 id="例子"><strong>例子</strong></h3>
+
+<p><strong>在字符串中使用map</strong></p>
+
+<p>在一个 String  上使用 map 方法获取字符串中每个字符所对应的 ASCII 码组成的数组：</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby">	<span class="n">var</span> <span class="n">map</span> <span class="o">=</span> <span class="no">Array</span><span class="p">.</span><span class="nf">prototype</span><span class="p">.</span><span class="nf">map</span>
+	<span class="n">var</span> <span class="n">a</span> <span class="o">=</span> <span class="n">map</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="s2">"Hello World"</span><span class="p">,</span> <span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">x</span><span class="p">.</span><span class="nf">charCodeAt</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="p">})</span>
+	<span class="sr">//</span> <span class="n">a</span><span class="err">的值为</span><span class="p">[</span><span class="mi">72</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">87</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">114</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span></code></pre></figure>
+
+<p><strong>易犯错误</strong></p>
+
+<p>通常情况下，map 方法中的 callback 函数只需要接受一个参数（很多时候，自定义的函数形参只有一个），就是正在被遍历的数组元素本身。</p>
+
+<p>但这并不意味着 map 只给 callback 传了一个参数（会传递3个参数）。这个思维惯性可能会让我们犯一个很容易犯的错误。</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"> 
+	<span class="sr">//</span> <span class="err">下面的语句返回什么呢</span><span class="p">:</span>
+	<span class="p">[</span><span class="s2">"1"</span><span class="p">,</span> <span class="s2">"2"</span><span class="p">,</span> <span class="s2">"3"</span><span class="p">].</span><span class="nf">map</span><span class="p">(</span><span class="n">parseInt</span><span class="p">);</span>
+	<span class="sr">//</span> <span class="err">你可能觉的会是</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+	<span class="sr">//</span> <span class="err">但实际的结果是</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="no">NaN</span><span class="p">,</span> <span class="no">NaN</span><span class="p">]</span></code></pre></figure>
+
+<ol>
+  <li>通常使用parseInt时,只需要传递一个参数.但实际上,parseInt可以有两个参数.第二个参数是进制数.可以通过语句”alert(parseInt.length)===2”来验证.</li>
+  <li>map方法在调用callback函数时,会给它传递三个参数:当前正在遍历的元素, 元素索引, 原数组本身.</li>
+  <li>第三个参数parseInt会忽视, 但第二个参数不会,也就是说,parseInt把传过来的索引值当成进制数来使用.从而返回了NaN.</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"> 	
+	<span class="sr">//</span><span class="err">应该使用如下的用户函数</span><span class="n">returnInt</span> 
+	<span class="n">function</span> <span class="n">returnInt</span><span class="p">(</span><span class="n">element</span><span class="p">){</span>
+		<span class="k">return</span> <span class="n">parseInt</span><span class="p">(</span><span class="n">element</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span>
+	<span class="p">}</span> 
+	<span class="p">[</span><span class="s2">"1"</span><span class="p">,</span> <span class="s2">"2"</span><span class="p">,</span> <span class="s2">"3"</span><span class="p">].</span><span class="nf">map</span><span class="p">(</span><span class="n">returnInt</span><span class="p">);</span>
+	<span class="sr">//</span> <span class="err">返回</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> </code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"> 
+<span class="sr">//</span><span class="err">获得日期</span>
+<span class="n">function</span> <span class="n">formatTime</span><span class="p">(</span><span class="n">date</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">var</span> <span class="n">year</span> <span class="o">=</span> <span class="n">date</span><span class="p">.</span><span class="nf">getFullYear</span><span class="p">()</span>
+  <span class="n">var</span> <span class="n">month</span> <span class="o">=</span> <span class="n">date</span><span class="p">.</span><span class="nf">getMonth</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="n">var</span> <span class="n">day</span> <span class="o">=</span> <span class="n">date</span><span class="p">.</span><span class="nf">getDate</span><span class="p">()</span>
+
+  <span class="n">var</span> <span class="n">hour</span> <span class="o">=</span> <span class="n">date</span><span class="p">.</span><span class="nf">getHours</span><span class="p">()</span>
+  <span class="n">var</span> <span class="n">minute</span> <span class="o">=</span> <span class="n">date</span><span class="p">.</span><span class="nf">getMinutes</span><span class="p">()</span>
+  <span class="n">var</span> <span class="n">second</span> <span class="o">=</span> <span class="n">date</span><span class="p">.</span><span class="nf">getSeconds</span><span class="p">()</span> 
+  
+  <span class="k">return</span> <span class="p">[</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">].</span><span class="nf">map</span><span class="p">(</span><span class="n">formatNumber</span><span class="p">).</span><span class="nf">join</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span> <span class="o">+</span> <span class="s1">' '</span> <span class="o">+</span> <span class="p">[</span><span class="n">hour</span><span class="p">,</span> <span class="n">minute</span><span class="p">,</span> <span class="n">second</span><span class="p">].</span><span class="nf">map</span><span class="p">(</span><span class="n">formatNumber</span><span class="p">).</span><span class="nf">join</span><span class="p">(</span><span class="s1">':'</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">function</span> <span class="n">formatNumber</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="p">.</span><span class="nf">toString</span><span class="p">()</span>
+  <span class="k">return</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">?</span> <span class="n">n</span> <span class="p">:</span> <span class="s1">'0'</span> <span class="o">+</span> <span class="n">n</span>
+<span class="p">}</span></code></pre></figure>
+
+
+	</div>
+</section>   
+<footer>
+	<p>Copyright &copy; 2017@Elaine Blog / All rights reserved.</p>
+</footer>
