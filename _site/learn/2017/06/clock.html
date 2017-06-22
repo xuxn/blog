@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Elaine blog</title>
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<link rel="stylesheet" href="/blog/css/style.css">
+	<link rel="stylesheet" href="/blog/css/highlight.css">
+</head>
+<body>
+<header>
+  <h1>Elaine <span>Blog<span></h1>
+</header>     
+<section class="container">
+	<div class="arc-con">
+		<h3 id="html"><strong>HTML</strong></h3>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&lt;</span><span class="n">div</span> <span class="k">class</span><span class="o">=</span><span class="s2">"clock-bg"</span><span class="o">&gt;</span>
+	<span class="o">&lt;</span><span class="n">span</span> <span class="nb">id</span><span class="o">=</span><span class="s2">"wu"</span><span class="o">&gt;&lt;</span><span class="sr">/span&gt;
+	&lt;div class="clock"&gt;
+		&lt;div class="hours-con"&gt; 
+			&lt;div class="hours"&gt;&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+		<span class="o">&lt;</span><span class="sr">/div&gt;
+		&lt;div class="minutes-con"&gt;
+			&lt;div class="minutes"&gt;&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+		<span class="o">&lt;</span><span class="sr">/div&gt;
+		&lt;div class="seconds-con"&gt;
+			&lt;div class="seconds"&gt;&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+		<span class="o">&lt;</span><span class="sr">/div&gt;
+	&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+	<span class="o">&lt;</span><span class="n">span</span> <span class="k">class</span><span class="o">=</span><span class="s2">"address"</span><span class="o">&gt;</span><span class="err">上海</span><span class="o">&lt;</span><span class="sr">/span&gt;
+&lt;/</span><span class="n">div</span><span class="o">&gt;</span></code></pre></figure>
+
+<h3 id="style"><strong>STYLE</strong></h3>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby">	<span class="sr">/*表盘*/</span>
+	<span class="p">.</span><span class="nf">clock</span><span class="o">-</span><span class="n">bg</span><span class="p">{</span>
+	  <span class="ss">width: </span><span class="mi">150</span><span class="n">px</span><span class="p">;</span>
+	  <span class="ss">height: </span><span class="mi">150</span><span class="n">px</span><span class="p">;</span>
+	  <span class="n">border</span><span class="o">-</span><span class="n">radius</span><span class="p">:</span><span class="mi">10</span><span class="n">px</span><span class="p">;</span>
+	  <span class="n">background</span><span class="o">-</span><span class="n">image</span><span class="ss">:linear</span><span class="o">-</span><span class="n">gradient</span><span class="p">(</span><span class="n">to</span> <span class="n">bottom</span><span class="p">,</span> <span class="c1">#484848 0%,#393939 25%, #494949 50%,#494949 50%,#040404 50%,#0d0d0d 75%,#11110f 100%);</span>
+	  <span class="n">border</span><span class="p">:</span><span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="c1">#010101;</span>
+	  <span class="ss">display: </span><span class="n">flex</span><span class="p">;</span>
+	  <span class="n">align</span><span class="o">-</span><span class="n">items</span><span class="ss">:center</span><span class="p">;</span>
+	  <span class="n">justify</span><span class="o">-</span><span class="n">content</span><span class="ss">:center</span><span class="p">;</span>
+	  <span class="n">flex</span><span class="o">-</span><span class="n">direction</span><span class="ss">:column</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="p">.</span><span class="nf">clock</span><span class="p">{</span>
+	  <span class="n">width</span><span class="p">:</span><span class="mi">100</span><span class="n">px</span><span class="p">;</span>
+	  <span class="n">height</span><span class="p">:</span><span class="mi">100</span><span class="n">px</span><span class="p">;</span>
+	  <span class="ss">background: </span><span class="c1">#fff  url(https://cssanimation.rocks/images/posts/clocks/ios_clock.svg)  no-repeat center center; </span>
+	  <span class="n">margin</span><span class="p">:</span><span class="mi">6</span><span class="n">px</span> <span class="mi">0</span><span class="p">;</span>
+	  <span class="ss">position: </span><span class="n">relative</span><span class="p">;</span>
+	  <span class="n">border</span><span class="o">-</span><span class="ss">radius: </span><span class="mi">50</span><span class="o">%</span><span class="p">;</span>
+	  <span class="n">background</span><span class="o">-</span><span class="ss">size: </span><span class="mi">80</span><span class="o">%</span><span class="p">;</span>
+	  <span class="n">box</span><span class="o">-</span><span class="n">shadow</span><span class="p">:</span><span class="mi">0</span> <span class="mi">0</span> <span class="mi">2</span><span class="n">px</span> <span class="n">rgba</span><span class="p">(</span><span class="mi">67</span><span class="p">,</span><span class="mi">67</span><span class="p">,</span><span class="mi">67</span><span class="p">,</span><span class="mi">0</span><span class="o">.</span><span class="mi">3</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="p">.</span><span class="nf">address</span><span class="p">{</span>
+	  <span class="n">color</span><span class="p">:</span><span class="c1">#fff;</span>
+	  <span class="n">text</span><span class="o">-</span><span class="n">shadow</span><span class="p">:</span><span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span><span class="n">px</span> <span class="n">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="o">.</span><span class="mi">2</span><span class="p">);</span>
+	<span class="p">}</span>
+		<span class="c1">#wu{</span>
+	  <span class="n">color</span><span class="p">:</span><span class="c1">#101010;</span>
+	  <span class="n">text</span><span class="o">-</span><span class="n">shadow</span><span class="p">:</span><span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span><span class="n">px</span> <span class="n">rgba</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="o">.</span><span class="mi">2</span><span class="p">);</span>
+	<span class="p">}</span>
+
+	<span class="p">.</span><span class="nf">clock</span><span class="o">::</span><span class="n">after</span><span class="p">{</span>
+	    <span class="n">width</span><span class="p">:</span><span class="mi">6</span><span class="n">px</span><span class="p">;</span>
+	    <span class="n">height</span><span class="p">:</span><span class="mi">6</span><span class="n">px</span><span class="p">;</span>
+	    <span class="n">border</span><span class="o">-</span><span class="n">radius</span><span class="p">:</span><span class="mi">50</span><span class="o">%</span><span class="p">;</span>
+	    <span class="ss">position: </span><span class="n">absolute</span><span class="p">;</span>
+	    <span class="n">top</span><span class="p">:</span><span class="mi">50</span><span class="o">%</span><span class="p">;</span>
+	    <span class="n">left</span><span class="p">:</span><span class="mi">50</span><span class="o">%</span><span class="p">;</span>
+	    <span class="n">z</span><span class="o">-</span><span class="ss">index: </span><span class="mi">10</span><span class="p">;</span>
+	    <span class="n">transform</span><span class="ss">:translate</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="o">%</span><span class="p">,</span><span class="o">-</span><span class="mi">50</span><span class="o">%</span><span class="p">);</span>
+	    <span class="n">background</span><span class="p">:</span><span class="c1">#e43c39;</span>
+	    <span class="n">border</span><span class="p">:</span><span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="c1">#fff;</span>
+	    <span class="n">box</span><span class="o">-</span><span class="n">shadow</span><span class="p">:</span><span class="mi">0</span> <span class="mi">0</span>  <span class="mi">0</span> <span class="mi">1</span><span class="n">px</span> <span class="c1">#454449;</span>
+	    <span class="n">content</span><span class="ss">:""</span><span class="p">;</span>
+	    <span class="ss">display: </span><span class="n">block</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="p">.</span><span class="nf">hours</span><span class="o">-</span><span class="n">con</span><span class="p">,.</span><span class="nf">minutes</span><span class="o">-</span><span class="n">con</span><span class="p">,.</span><span class="nf">seconds</span><span class="o">-</span><span class="n">con</span><span class="p">{</span>
+	    <span class="ss">position: </span><span class="n">absolute</span><span class="p">;</span>
+	    <span class="ss">left: </span><span class="mi">0</span><span class="p">;</span>
+	    <span class="ss">top: </span><span class="mi">0</span><span class="p">;</span>
+	    <span class="n">right</span><span class="p">:</span><span class="mi">0</span><span class="p">;</span>
+	    <span class="n">bottom</span><span class="p">:</span><span class="mi">0</span><span class="p">;</span> 
+	<span class="p">}</span>
+	<span class="sr">/*时针*/</span>
+	<span class="p">.</span><span class="nf">hours</span><span class="p">{</span>
+	     <span class="n">position</span><span class="ss">:absolute</span><span class="p">;</span>  
+	     <span class="n">border</span><span class="o">-</span><span class="n">left</span><span class="p">:</span><span class="mi">4</span><span class="n">px</span> <span class="n">solid</span> <span class="n">transparent</span><span class="p">;</span>
+	     <span class="n">border</span><span class="o">-</span><span class="n">right</span><span class="p">:</span><span class="mi">4</span><span class="n">px</span> <span class="n">solid</span> <span class="n">transparent</span><span class="p">;</span>
+	     <span class="n">border</span><span class="o">-</span><span class="n">bottom</span><span class="p">:</span><span class="mi">30</span><span class="n">px</span> <span class="n">solid</span> <span class="c1">#000;</span>
+	     <span class="n">top</span><span class="p">:</span><span class="mi">22</span><span class="o">%</span><span class="p">;</span>
+	     <span class="n">left</span><span class="p">:</span><span class="mi">50</span><span class="o">%</span><span class="p">;</span>
+	     <span class="n">margin</span><span class="o">-</span><span class="n">left</span><span class="p">:</span><span class="o">-</span><span class="mi">4</span><span class="n">px</span><span class="p">;</span>  
+	     <span class="n">transform</span><span class="o">-</span><span class="ss">origin: </span><span class="mi">50</span><span class="o">%</span> <span class="mi">100</span><span class="o">%</span><span class="p">;</span>
+	<span class="p">}</span> 
+	<span class="sr">/*分针*/</span>
+	<span class="p">.</span><span class="nf">minutes</span><span class="p">{</span>
+	     <span class="n">position</span><span class="ss">:absolute</span><span class="p">;</span>
+	     <span class="n">border</span><span class="o">-</span><span class="n">left</span><span class="p">:</span><span class="mi">4</span><span class="n">px</span> <span class="n">solid</span> <span class="n">transparent</span><span class="p">;</span>
+	     <span class="n">border</span><span class="o">-</span><span class="n">right</span><span class="p">:</span><span class="mi">4</span><span class="n">px</span> <span class="n">solid</span> <span class="n">transparent</span><span class="p">;</span>
+	     <span class="n">border</span><span class="o">-</span><span class="n">bottom</span><span class="p">:</span><span class="mi">40</span><span class="n">px</span> <span class="n">solid</span> <span class="c1">#000; </span>
+	     <span class="n">top</span><span class="p">:</span><span class="mi">10</span><span class="o">%</span><span class="p">;</span>
+	     <span class="n">left</span><span class="p">:</span><span class="mi">50</span><span class="o">%</span><span class="p">;</span>
+	     <span class="n">margin</span><span class="o">-</span><span class="n">left</span><span class="p">:</span><span class="o">-</span><span class="mi">4</span><span class="n">px</span><span class="p">;</span> 
+	     <span class="n">transform</span><span class="o">-</span><span class="ss">origin: </span><span class="mi">50</span><span class="o">%</span> <span class="mi">100</span><span class="o">%</span><span class="p">;</span> 
+	<span class="p">}</span>
+	<span class="sr">/*秒针*/</span>
+	<span class="p">.</span><span class="nf">seconds</span><span class="o">-</span><span class="n">con</span><span class="p">{</span>
+	  <span class="n">z</span><span class="o">-</span><span class="n">index</span><span class="p">:</span><span class="mi">12</span><span class="p">;</span> 
+	<span class="p">}</span>
+	<span class="p">.</span><span class="nf">seconds</span><span class="p">{</span>
+	    <span class="n">position</span><span class="ss">:absolute</span><span class="p">;</span>
+	     <span class="n">width</span><span class="p">:</span><span class="mi">2</span><span class="n">px</span><span class="p">;</span>
+	     <span class="n">height</span><span class="p">:</span><span class="mi">48</span><span class="o">%</span><span class="p">;</span>
+	     <span class="n">top</span><span class="p">:</span><span class="mi">2</span><span class="o">%</span><span class="p">;</span>
+	     <span class="n">left</span><span class="p">:</span><span class="mi">50</span><span class="o">%</span><span class="p">;</span>  
+	     <span class="n">background</span><span class="p">:</span><span class="c1">#e43c39;</span>
+	     <span class="n">transform</span><span class="o">-</span><span class="ss">origin: </span><span class="mi">50</span><span class="o">%</span>  <span class="mi">100</span><span class="o">%</span><span class="p">;</span>
+	<span class="p">}</span>
+	  
+	<span class="p">.</span><span class="nf">hours</span><span class="o">-</span><span class="n">con</span><span class="p">{</span>
+	    <span class="ss">animation: </span><span class="n">rotate</span> <span class="mi">43200</span><span class="n">s</span> <span class="n">infinite</span> <span class="n">linear</span><span class="p">;</span>
+	<span class="p">}</span></code></pre></figure>
+
+<h3 id="初始化表盘刻度"><strong>初始化表盘刻度</strong></h3>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">window</span><span class="p">.</span><span class="nf">onload</span><span class="o">=</span><span class="n">function</span><span class="p">(){</span>
+	<span class="n">init</span><span class="p">();</span>
+	<span class="n">function</span> <span class="n">init</span><span class="p">(){</span>
+		<span class="n">initLocalClocks</span><span class="p">();</span> 
+	<span class="p">}</span>
+ 
+	<span class="sr">//</span><span class="err">初始化表盘刻度</span>
+	<span class="n">function</span> <span class="n">initLocalClocks</span><span class="p">()</span> <span class="p">{</span>
+		<span class="n">var</span> <span class="n">date</span><span class="o">=</span><span class="kp">new</span> <span class="no">Date</span><span class="p">;</span> 
+		<span class="n">var</span> <span class="n">hour</span><span class="o">=</span><span class="n">date</span><span class="p">.</span><span class="nf">getHours</span><span class="p">();</span>
+		<span class="n">var</span> <span class="n">min</span><span class="o">=</span><span class="n">date</span><span class="p">.</span><span class="nf">getMinutes</span><span class="p">();</span>
+		<span class="n">var</span> <span class="n">sec</span><span class="o">=</span><span class="n">date</span><span class="p">.</span><span class="nf">getSeconds</span><span class="p">();</span>
+		<span class="n">var</span> <span class="n">hands</span><span class="o">=</span><span class="p">[</span>
+	 	<span class="p">{</span>
+	 		<span class="n">hand</span><span class="ss">:'hours'</span><span class="p">,</span>
+	 		<span class="n">angle</span><span class="ss">:hour</span><span class="o">*</span><span class="mi">30</span><span class="o">+</span><span class="n">min</span><span class="o">/</span><span class="mi">2</span>
+	 	<span class="p">},</span>
+	 	<span class="p">{</span>
+	 		<span class="n">hand</span><span class="ss">:'minutes'</span><span class="p">,</span>
+	 		<span class="n">angle</span><span class="ss">:min</span><span class="o">*</span><span class="mi">6</span>
+	 	<span class="p">},</span>
+	 	<span class="p">{</span>
+	 		<span class="n">hand</span><span class="ss">:'seconds'</span><span class="p">,</span>
+	 		<span class="n">angle</span><span class="ss">:sec</span><span class="o">*</span><span class="mi">6</span>
+	 	<span class="p">}</span>
+	 	<span class="p">]</span> 
+	 	<span class="k">for</span><span class="p">(</span><span class="n">var</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">hands</span><span class="p">.</span><span class="nf">length</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span> 
+	 		<span class="n">var</span> <span class="n">elements</span><span class="o">=</span><span class="n">document</span><span class="p">.</span><span class="nf">querySelectorAll</span><span class="p">(</span><span class="s2">"."</span><span class="o">+</span><span class="n">hands</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">hand</span><span class="p">);</span>  
+
+	 		<span class="k">for</span><span class="p">(</span><span class="n">var</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">elements</span><span class="p">.</span><span class="nf">length</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+	 			<span class="n">elements</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="nf">style</span><span class="p">.</span><span class="nf">transform</span><span class="o">=</span><span class="s1">'rotate(+'</span><span class="o">+</span><span class="n">hands</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">angle</span><span class="o">+</span><span class="s1">'deg)'</span><span class="p">;</span>
+	 			<span class="n">elements</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="nf">style</span><span class="o">.</span><span class="no">WebkitTransform</span><span class="o">=</span><span class="s1">'rotate('</span><span class="o">+</span><span class="n">hands</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">angle</span><span class="o">+</span><span class="s1">'deg)'</span><span class="p">;</span>  
+	 		<span class="p">}</span>
+	 	<span class="p">}</span> 
+   <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<h3 id="添加动画"><strong>添加动画</strong></h3>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="p">.</span><span class="nf">minutes</span><span class="o">-</span><span class="n">con</span><span class="p">{</span>
+  <span class="ss">animation: </span><span class="n">rotate</span> <span class="mi">3600</span><span class="n">s</span> <span class="n">infinite</span> <span class="n">steps</span><span class="p">(</span><span class="mi">60</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nf">seconds</span><span class="o">-</span><span class="n">con</span><span class="p">{</span>
+    <span class="ss">animation: </span><span class="n">rotate</span> <span class="mi">60</span><span class="n">s</span> <span class="n">infinite</span> <span class="n">steps</span><span class="p">(</span><span class="mi">60</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="vi">@keyframes</span> <span class="n">rotate</span><span class="p">{</span>
+    <span class="n">to</span><span class="p">{</span>
+        <span class="n">transform</span><span class="ss">:rotate</span><span class="p">(</span><span class="mi">360</span><span class="n">deg</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<h3 id="优化"><strong>优化</strong></h3>
+
+<h4 id="此时时钟基本已可正常转动但是会有分针和秒针的误差"><strong>此时时钟基本已可正常转动，但是会有分针和秒针的误差</strong></h4>
+
+<p>//获取秒针初始时候的位置，以便下面操作秒针到达12刻度时候，分针才转动</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">for</span><span class="p">(</span><span class="n">var</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">hands</span><span class="p">.</span><span class="nf">length</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span> 
+	<span class="n">var</span> <span class="n">elements</span><span class="o">=</span><span class="n">document</span><span class="p">.</span><span class="nf">querySelectorAll</span><span class="p">(</span><span class="s2">"."</span><span class="o">+</span><span class="n">hands</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">hand</span><span class="p">);</span>  
+
+	<span class="k">for</span><span class="p">(</span><span class="n">var</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">elements</span><span class="p">.</span><span class="nf">length</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+		<span class="n">elements</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="nf">style</span><span class="p">.</span><span class="nf">transform</span><span class="o">=</span><span class="s1">'rotate(+'</span><span class="o">+</span><span class="n">hands</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">angle</span><span class="o">+</span><span class="s1">'deg)'</span><span class="p">;</span>
+		<span class="n">elements</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="nf">style</span><span class="o">.</span><span class="no">WebkitTransform</span><span class="o">=</span><span class="s1">'rotate('</span><span class="o">+</span><span class="n">hands</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">angle</span><span class="o">+</span><span class="s1">'deg)'</span><span class="p">;</span>  
+		
+		<span class="k">if</span> <span class="p">(</span><span class="n">hands</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">hand</span> <span class="o">===</span> <span class="s1">'minutes'</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">elements</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="nf">parentNode</span><span class="p">.</span><span class="nf">setAttribute</span><span class="p">(</span><span class="s1">'data-second-angle'</span><span class="p">,</span> <span class="n">hands</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">].</span><span class="nf">angle</span><span class="p">);</span> 
+		<span class="p">}</span>    
+	<span class="p">}</span>
+<span class="p">}</span> </code></pre></figure>
+
+<p>//设置秒针和分针转动，无需设置时针的转动，css已解决</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="sr">//</span><span class="err">设置秒针</span>
+<span class="n">function</span> <span class="n">moveSecondHands</span><span class="p">(){</span>
+	<span class="n">var</span> <span class="n">secCons</span><span class="o">=</span><span class="n">document</span><span class="p">.</span><span class="nf">querySelectorAll</span><span class="p">(</span><span class="s2">".seconds-con"</span><span class="p">);</span> 
+	<span class="n">setInterval</span><span class="p">(</span><span class="n">function</span><span class="p">(){</span>
+		<span class="k">for</span><span class="p">(</span><span class="n">var</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">secCons</span><span class="p">.</span><span class="nf">length</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">secCons</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">angle</span><span class="o">===</span><span class="n">undefined</span><span class="p">){</span>
+				<span class="n">secCons</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">angle</span><span class="o">=</span><span class="mi">6</span><span class="p">;</span>
+			<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+				<span class="n">secCons</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">angle</span><span class="o">+=</span><span class="mi">6</span><span class="p">;</span>
+			<span class="p">}</span>
+			<span class="n">secCons</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">style</span><span class="p">.</span><span class="nf">transform</span><span class="o">=</span><span class="s2">"rotate("</span><span class="o">+</span><span class="n">secCons</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">angle</span><span class="o">+</span><span class="s2">"deg)"</span><span class="p">;</span>
+			<span class="n">secCons</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">style</span><span class="p">.</span><span class="nf">webkitTransform</span><span class="o">=</span><span class="s2">"rotate("</span><span class="o">+</span><span class="n">secCons</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">angle</span><span class="o">+</span><span class="s2">"deg)"</span><span class="p">;</span>
+		<span class="p">}</span> 
+	<span class="p">},</span><span class="mi">1000</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="sr">//</span><span class="err">设置分针</span>
+<span class="n">function</span> <span class="n">moveMinuteHands</span><span class="p">(</span><span class="n">containers</span><span class="p">){</span>  
+	<span class="sr">//</span><span class="err">先把分针转到延迟后的正时刻</span>
+	<span class="k">for</span><span class="p">(</span><span class="n">var</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">containers</span><span class="p">.</span><span class="nf">length</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		 <span class="n">containers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">style</span><span class="p">.</span><span class="nf">webkitTransform</span> <span class="o">=</span> <span class="s1">'rotateZ(6deg)'</span><span class="p">;</span>
+		<span class="n">containers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">style</span><span class="p">.</span><span class="nf">transform</span> <span class="o">=</span> <span class="s1">'rotateZ(6deg)'</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="sr">//</span><span class="err">分针进行正常的转动</span>
+	<span class="n">setInterval</span><span class="p">(</span><span class="n">function</span><span class="p">(){</span>
+		<span class="k">for</span><span class="p">(</span><span class="n">var</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">containers</span><span class="p">.</span><span class="nf">length</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">containers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">angle</span><span class="o">===</span><span class="n">undefined</span><span class="p">){</span>
+				<span class="n">containers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">angle</span><span class="o">=</span><span class="mi">12</span><span class="p">;</span>  <span class="sr">//</span><span class="err">注意是在上一个刻度之前，即从</span><span class="mi">4</span><span class="err">转到</span><span class="mi">6</span>
+			<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+				<span class="n">containers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">angle</span><span class="o">+=</span><span class="mi">6</span><span class="p">;</span>
+			<span class="p">}</span>
+			<span class="n">containers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">style</span><span class="p">.</span><span class="nf">transform</span><span class="o">=</span><span class="s2">"rotate("</span><span class="o">+</span><span class="n">containers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">angle</span><span class="o">+</span><span class="s2">"deg)"</span><span class="p">;</span>
+			<span class="n">containers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">style</span><span class="p">.</span><span class="nf">webkitTransform</span><span class="o">=</span><span class="s2">"rotate("</span><span class="o">+</span><span class="n">containers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">angle</span><span class="o">+</span><span class="s2">"deg)"</span><span class="p">;</span>
+		<span class="p">}</span> 
+	<span class="p">},</span><span class="mi">60000</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="sr">//</span><span class="err">延迟分针</span>
+<span class="n">function</span> <span class="n">setUpMinuteHands</span><span class="p">(){</span>
+	<span class="n">var</span> <span class="n">minCons</span><span class="o">=</span><span class="n">document</span><span class="p">.</span><span class="nf">querySelectorAll</span><span class="p">(</span><span class="s2">".minutes-con"</span><span class="p">);</span> 
+	<span class="n">var</span> <span class="n">angle</span><span class="o">=</span><span class="n">minCons</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">getAttribute</span><span class="p">(</span><span class="s1">'data-second-angle'</span><span class="p">);</span>
+	<span class="n">var</span> <span class="n">delay</span><span class="o">=</span><span class="p">(</span><span class="mi">360</span><span class="o">-</span><span class="n">angle</span><span class="p">)</span><span class="o">/</span><span class="mi">6</span><span class="o">*</span><span class="mi">1000</span><span class="p">;</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">angle</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>
+		<span class="n">setTimeout</span><span class="p">(</span><span class="n">function</span><span class="p">(){</span>
+			 <span class="n">moveMinuteHands</span><span class="p">(</span><span class="n">minCons</span><span class="p">);</span>
+		<span class="p">},</span><span class="n">delay</span><span class="p">)</span>
+	<span class="p">}</span>  
+<span class="p">}</span> </code></pre></figure>
+
+<p>//方法添加到初始化函数中</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">function</span> <span class="n">init</span><span class="p">(){</span>
+	<span class="n">initLocalClocks</span><span class="p">();</span>
+	<span class="n">setUpMinuteHands</span><span class="p">();</span>
+	<span class="n">moveSecondHands</span><span class="p">();</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>参考出处 https://cssanimation.rocks/clocks/</p>
+
+	</div>
+</section>   
+<footer>
+	<p>Copyright &copy; 2017@Elaine Blog / All rights reserved.</p>
+</footer>
