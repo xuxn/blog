@@ -224,12 +224,8 @@
 	<span class="p">}</span>
 	<span class="sr">//</span><span class="err">分针进行正常的转动</span>
 	<span class="n">setInterval</span><span class="p">(</span><span class="n">function</span><span class="p">(){</span>
-		<span class="k">for</span><span class="p">(</span><span class="n">var</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">containers</span><span class="p">.</span><span class="nf">length</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-			<span class="k">if</span><span class="p">(</span><span class="n">containers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">angle</span><span class="o">===</span><span class="n">undefined</span><span class="p">){</span>
-				<span class="n">containers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">angle</span><span class="o">=</span><span class="mi">12</span><span class="p">;</span>  <span class="sr">//</span><span class="err">注意是在上一个刻度之前，即从</span><span class="mi">4</span><span class="err">转到</span><span class="mi">6</span>
-			<span class="p">}</span><span class="k">else</span><span class="p">{</span>
-				<span class="n">containers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">angle</span><span class="o">+=</span><span class="mi">6</span><span class="p">;</span>
-			<span class="p">}</span>
+		<span class="k">for</span><span class="p">(</span><span class="n">var</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">containers</span><span class="p">.</span><span class="nf">length</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span> 
+			<span class="n">containers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">angle</span><span class="o">+=</span><span class="mi">6</span><span class="p">;</span> 
 			<span class="n">containers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">style</span><span class="p">.</span><span class="nf">transform</span><span class="o">=</span><span class="s2">"rotate("</span><span class="o">+</span><span class="n">containers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">angle</span><span class="o">+</span><span class="s2">"deg)"</span><span class="p">;</span>
 			<span class="n">containers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">style</span><span class="p">.</span><span class="nf">webkitTransform</span><span class="o">=</span><span class="s2">"rotate("</span><span class="o">+</span><span class="n">containers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">angle</span><span class="o">+</span><span class="s2">"deg)"</span><span class="p">;</span>
 		<span class="p">}</span> 
@@ -254,6 +250,15 @@
 	<span class="n">initLocalClocks</span><span class="p">();</span>
 	<span class="n">setUpMinuteHands</span><span class="p">();</span>
 	<span class="n">moveSecondHands</span><span class="p">();</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>//修改时针和分针的动画</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="p">.</span><span class="nf">minutes</span><span class="o">-</span><span class="n">con</span><span class="p">{</span>
+  <span class="ss">transition: </span><span class="n">transform</span> <span class="mi">0</span><span class="o">.</span><span class="mi">3</span><span class="n">s</span> <span class="n">cubic</span><span class="o">-</span><span class="n">bezier</span><span class="p">(</span><span class="o">.</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="o">.</span><span class="mi">08</span><span class="p">,</span><span class="o">.</span><span class="mi">55</span><span class="p">,</span><span class="o">.</span><span class="mi">44</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nf">seconds</span><span class="o">-</span><span class="n">con</span><span class="p">{</span>
+  <span class="ss">transition: </span><span class="n">transform</span> <span class="mi">0</span><span class="o">.</span><span class="mi">2</span><span class="n">s</span> <span class="n">cubic</span><span class="o">-</span><span class="n">bezier</span><span class="p">(</span><span class="o">.</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="o">.</span><span class="mi">08</span><span class="p">,</span><span class="o">.</span><span class="mi">55</span><span class="p">,</span><span class="o">.</span><span class="mi">44</span><span class="p">);</span>
 <span class="p">}</span></code></pre></figure>
 
 <p>参考出处 https://cssanimation.rocks/clocks/</p>
