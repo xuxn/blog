@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Elaine blog</title>
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<link rel="stylesheet" href="/blog/css/style.css">
+	<link rel="stylesheet" href="/blog/css/highlight.css">
+</head>
+<body>
+<header>
+  <h1>Elaine <span>Blog<span></h1>
+</header>     
+<section class="container">
+	<div class="arc-con">
+		<h3 id="js中的foreacheachmap方法"><strong>JS中的forEach、$.each、map方法</strong></h3>
+
+<h3 id="foreach"><strong>forEach</strong></h3>
+
+<p>forEach是ECMA5中Array新方法中最基本的一个，就是遍历，循环。</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span> <span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">].</span><span class="nf">forEach</span><span class="p">(</span><span class="n">alert</span><span class="p">);</span></code></pre></figure>
+
+<p>等同于下面这个for循环</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby">	<span class="n">var</span> <span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">];</span>
+ 	<span class="k">for</span> <span class="p">(</span><span class="n">var</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">length</span> <span class="o">=</span> <span class="n">array</span><span class="p">.</span><span class="nf">length</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">alert</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
+	<span class="p">}</span></code></pre></figure>
+
+<p>Array在ES5新增的方法中，参数都是function类型，默认有传参，forEach方法中的function回调支持3个参数，第1个是遍历的数组内容；第2个是对应的数组索引，第3个是数组本身。</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby">	<span class="p">[].</span><span class="nf">forEach</span><span class="p">(</span><span class="n">function</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">array</span><span class="p">)</span> <span class="p">{</span>
+  		<span class="sr">//</span> <span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+	<span class="p">});</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby">	<span class="n">var</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span> <span class="p">;</span>
+	<span class="n">var</span> <span class="n">sum</span><span class="o">=</span><span class="mi">0</span> <span class="p">;</span>
+	<span class="n">data</span><span class="p">.</span><span class="nf">forEach</span><span class="p">(</span><span class="n">function</span><span class="p">(</span><span class="n">val</span><span class="p">,</span><span class="n">index</span><span class="p">,</span><span class="n">arr</span><span class="p">){</span>
+  		<span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">==</span><span class="n">val</span><span class="p">);</span>  <span class="sr">//</span> <span class="o">==&gt;</span> <span class="kp">true</span>
+  		<span class="n">sum</span><span class="o">+=</span><span class="n">val</span>          
+	<span class="p">})</span>
+	<span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="n">sum</span><span class="p">);</span>          <span class="sr">//</span> <span class="o">==&gt;</span> <span class="mi">8</span></code></pre></figure>
+
+<h3 id="jquery中的each方法"><strong>jQuery中的$.each方法</strong></h3>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby">	<span class="vg">$.</span><span class="n">each</span><span class="p">([],</span> <span class="n">function</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">array</span><span class="p">)</span> <span class="p">{</span>
+  		<span class="sr">//</span> <span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+	<span class="p">});</span></code></pre></figure>
+
+<h3 id="map"><strong>map</strong></h3>
+
+<p>这里的map不是“地图”的意思，而是指“映射”。[].map(); 基本用法跟forEach方法类似：</p>
+
+<p>array.map(callback,[ thisObject]);</p>
+
+<p>callback的参数也类似：</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby">	<span class="p">[].</span><span class="nf">map</span><span class="p">(</span><span class="n">function</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">array</span><span class="p">)</span> <span class="p">{</span>
+		<span class="sr">//</span> <span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+	<span class="p">});</span></code></pre></figure>
+
+<p>map方法的作用不难理解，“映射”嘛，也就是原数组被“映射”成对应新数组。</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby">	<span class="n">var</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span> 
+	<span class="n">var</span> <span class="no">Squares</span><span class="o">=</span><span class="n">data</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="n">function</span><span class="p">(</span><span class="n">val</span><span class="p">,</span><span class="n">index</span><span class="p">,</span><span class="n">arr</span><span class="p">){</span>
+  		<span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">==</span><span class="n">val</span><span class="p">);</span>  <span class="sr">//</span> <span class="o">==&gt;</span> <span class="kp">true</span>
+  		<span class="k">return</span> <span class="n">val</span><span class="o">*</span><span class="n">val</span>         
+	<span class="p">})</span>
+	<span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="no">Squares</span><span class="p">);</span>        <span class="sr">//</span> <span class="o">==&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span></code></pre></figure>
+
+<h3 id="区别"><strong>区别</strong></h3>
+
+<p><strong>1. $.each方法的第1个和第2个参数正好是相反的, 显示index,才是value</strong>
+<strong>2. 注意：由于forEach、map都是ECMA5新增数组的方法，所以ie9以下的浏览器还不支持。</strong></p>
+
+<p>Array.prototype扩展可以让IE6-IE8浏览器也支持map方法：</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby">	<span class="k">if</span> <span class="p">(</span><span class="n">typeof</span> <span class="no">Array</span><span class="p">.</span><span class="nf">prototype</span><span class="p">.</span><span class="nf">map</span> <span class="o">!=</span> <span class="s2">"function"</span><span class="p">)</span> <span class="p">{</span>
+		<span class="no">Array</span><span class="p">.</span><span class="nf">prototype</span><span class="p">.</span><span class="nf">map</span> <span class="o">=</span> <span class="n">function</span> <span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">var</span> <span class="n">arr</span> <span class="o">=</span> <span class="p">[];</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">typeof</span> <span class="n">fn</span> <span class="o">===</span> <span class="s2">"function"</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">for</span> <span class="p">(</span><span class="n">var</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">length</span> <span class="o">=</span> <span class="n">this</span><span class="p">.</span><span class="nf">length</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>      
+					<span class="n">arr</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="n">fn</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">this</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">k</span><span class="p">,</span> <span class="n">this</span><span class="p">));</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+			<span class="k">return</span> <span class="n">arr</span><span class="p">;</span>
+		<span class="p">};</span>
+	<span class="p">}</span></code></pre></figure>
+
+
+	</div>
+</section>   
+<footer>
+	<p>Copyright &copy; 2017@Elaine Blog / All rights reserved.</p>
+</footer>
