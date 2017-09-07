@@ -17,6 +17,27 @@
 <ul class="arc-list">
     
         <li>
+          <h2 class="arc-title"><a href="/blog/learn/2017/09/js-this.html">JavaScript 里 this 的简单规则</a></h2>
+          <p class="arc-date">2017-09-07 </p>
+          <p class="arc-con">JavaScript 里 this 的简单规则
+
+几条规则确定函数里的 this 是什么。
+
+想确定 this 是什么其实非常简单。总体的规则是，通过检查它的调用位置，在函数被调用的的时候确定 this。它遵循下面这些规则，接下来以优先级顺序说明。
+
+规则
+
+1、如果在调用函数时使用 new 关键字，那么函数里的 this 就是一个全新的对象。
+
+function ConstructorExample() {
+    console.log(this);
+    this.value = 10;
+    console.log(this);
+}
+new ConstructorExampl...<a href="/blog/learn/2017/09/js-this.html" class="more">Read More</a></p>
+        </li>
+    
+        <li>
           <h2 class="arc-title"><a href="/blog/learn/2017/09/visibilitychange.html">[Javascript]visibilitychange</a></h2>
           <p class="arc-date">2017-09-04 </p>
           <p class="arc-con">[Javascript]visibilitychange
