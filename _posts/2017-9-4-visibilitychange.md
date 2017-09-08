@@ -37,31 +37,25 @@ document.visibilityState: 返回当前页面的可见状态
 
 ### **当应用程序或浏览器标签页切换到后台时就停止播放音乐，从后台切换回来时又开始播放音乐**
 
-{% highlight ruby %}
-<html>
-<body onload="load()">
-	<audio id="audio_id">
-		<source src="demo-audio.mp3"/>
-		<source src="demo-audio.ogg"/>
-		Browser can't support Audio tag.
-	</audio>
-<script>
-	var audioElement = document.getElementById("audio_id");
-	function onVisibilityChanged(event) {
-	  var hidden = event.target.webkitHidden;
-	  if (hidden)
-	    audioElement.pause();
-	  else
-	    audioElement.play();
-	}
-	function load() {
-	  audioElement.play();
-	  audioElement.loop = true;
-	  document.addEventListener("webkitvisibilitychange", onVisibilityChanged, false);
-	}
-</script>
-</body>
-</html>
+{% highlight ruby %} 
+<audio src="http://www.w3school.com.cn/i/horse.ogg" controls="controls" id="audio">浏览器不支持</audio>
+ 
+//控制音频
+var audio=document.getElementById("audio");
+audio.play();
+audio.loop=true;
+
+function changeAudio(event){
+    var target=event.target;
+    if(target.hidden){
+        audio.pause();
+    }else{
+        audio.play();
+    }
+}
+
+document.addEventListener('visibilitychange',changeAudio,false);
+  
 {% endhighlight %}
 
 
@@ -77,51 +71,55 @@ document.visibilityState: 返回当前页面的可见状态
 //登录信息页
 <p id="loginInfo"></p>
 (function() {
-    if (typeof pageVisibility.hidden !== "undefined") {
-        var eleLoginInfo = document.querySelector("#loginInfo");
-        var funLoginInfo = function() {
-            var username = localStorage.username || sessionStorage.username;
-            if (username) {
-                eleLoginInfo.innerHTML = '欢迎回来，<strong>' + username + '</strong>';
-                sessionStorage.username = username;
-            } else {
-                eleLoginInfo.innerHTML = '您尚未登录，请<a target="_blank" href="'+ location.href.replace("-1.", "-2.") +'">登录</a>';
-            }    
-        }
-        pageVisibility.visibilitychange(function() {
-            if (!this.hidden) funLoginInfo();
-        });
-        
-        funLoginInfo();
-        
-        // 页面关闭清除localStorage
-        window.addEventListener("unload", function() {
-            localStorage.removeItem("username");
-        })
-    } else {
-        alert("弹框？？？没错，因为你的这个浏览器不支持Page Visibility API的啦！");    
+    //返回后显示登录用户名
+    var loginInfo=document.getElementById("loginInfo"); 
+
+    function changePage(){ 
+        var username=localStorage.name;
+        if(username){
+            loginInfo.innerHTML='欢迎回来，'+username;
+        }else{
+            var href=location.href.replace("index","login"); 
+            loginInfo.innerHTML='您尚未登录，请<a href="'+href+'" target="_blank">登录</a>';
+
+        } 
     }
+
+    //首次进入页面
+    changePage();
+
+    //切换页面回来
+    document.addEventListener('visibilitychange',function(){
+        if(!document.hidden){
+            changePage();
+        }
+    },false);
+
+
+    //关闭页面的时候清楚缓存
+    window.addEventListener("unload",function(){
+        localStorage.removeItem('name'); 
+    },false);
 })();
 
 //登录页面
-<form id="loginForm" action="" method="post">
-    <p>用户名：<input type="text" name="username" required /></p>
-    <p>密码：<input type="password" name="password" required /></p>
-    <p><input type="submit" /></p>
+<form id="loginForm">
+    <table>
+        <tr><td>用户名</td><td><input type="text" placeholder="请输入用户名" name="username"></td></tr>
+        <tr><td>密码</td><td><input type="password" placeholder="请输入密码" name="password"></td></tr>
+        <tr><td>邮箱</td><td><input type="email" placeholder="请输入邮箱" name="email"></td></tr>
+        <tr><td colspan="2"><button type="submit" value="登录" name="submit">登录</button></td></tr>
+    </table>
 </form>
 
 (function() {
-    if (typeof window.screenX === "number") {
-	    var eleLoginForm = document.querySelector("#loginForm");
-        eleLoginForm.addEventListener("submit", function(e) {
-            localStorage.username = document.querySelector("input[name='username']").value;
-            alert("登录成功！现在可以回到刚才的页面了！");
-            this.reset();
-            e.preventDefault();
-        }, false);
-    } else {
-        alert("弹框？？？没错，因为你的这个浏览器不支持HTML5表单的啦！");    
-    }
+    var loginForm=document.getElementById("loginForm"); 
+    loginForm.addEventListener("submit",function(e){
+        localStorage.name=loginForm.elements[0].value;
+        alert("返回首页，您已登录");
+        this.reset(); 
+        e.preventDefault();
+    })
 })();
 {% endhighlight %}
 

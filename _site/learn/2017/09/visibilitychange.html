@@ -42,30 +42,25 @@
 
 <h3 id="当应用程序或浏览器标签页切换到后台时就停止播放音乐从后台切换回来时又开始播放音乐"><strong>当应用程序或浏览器标签页切换到后台时就停止播放音乐，从后台切换回来时又开始播放音乐</strong></h3>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&lt;</span><span class="n">html</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="n">body</span> <span class="n">onload</span><span class="o">=</span><span class="s2">"load()"</span><span class="o">&gt;</span>
-	<span class="o">&lt;</span><span class="n">audio</span> <span class="nb">id</span><span class="o">=</span><span class="s2">"audio_id"</span><span class="o">&gt;</span>
-		<span class="o">&lt;</span><span class="n">source</span> <span class="n">src</span><span class="o">=</span><span class="s2">"demo-audio.mp3"</span><span class="o">/&gt;</span>
-		<span class="o">&lt;</span><span class="n">source</span> <span class="n">src</span><span class="o">=</span><span class="s2">"demo-audio.ogg"</span><span class="o">/&gt;</span>
-		<span class="no">Browser</span> <span class="n">can</span><span class="err">'</span><span class="n">t</span> <span class="n">support</span> <span class="no">Audio</span> <span class="n">tag</span><span class="p">.</span>
-	<span class="nf">&lt;</span><span class="o">/</span><span class="n">audio</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="n">script</span><span class="o">&gt;</span>
-	<span class="n">var</span> <span class="n">audioElement</span> <span class="o">=</span> <span class="n">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="s2">"audio_id"</span><span class="p">);</span>
-	<span class="n">function</span> <span class="n">onVisibilityChanged</span><span class="p">(</span><span class="n">event</span><span class="p">)</span> <span class="p">{</span>
-	  <span class="n">var</span> <span class="n">hidden</span> <span class="o">=</span> <span class="n">event</span><span class="p">.</span><span class="nf">target</span><span class="p">.</span><span class="nf">webkitHidden</span><span class="p">;</span>
-	  <span class="k">if</span> <span class="p">(</span><span class="n">hidden</span><span class="p">)</span>
-	    <span class="n">audioElement</span><span class="p">.</span><span class="nf">pause</span><span class="p">();</span>
-	  <span class="k">else</span>
-	    <span class="n">audioElement</span><span class="p">.</span><span class="nf">play</span><span class="p">();</span>
-	<span class="p">}</span>
-	<span class="n">function</span> <span class="nb">load</span><span class="p">()</span> <span class="p">{</span>
-	  <span class="n">audioElement</span><span class="p">.</span><span class="nf">play</span><span class="p">();</span>
-	  <span class="n">audioElement</span><span class="p">.</span><span class="nf">loop</span> <span class="o">=</span> <span class="kp">true</span><span class="p">;</span>
-	  <span class="n">document</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="s2">"webkitvisibilitychange"</span><span class="p">,</span> <span class="n">onVisibilityChanged</span><span class="p">,</span> <span class="kp">false</span><span class="p">);</span>
-	<span class="p">}</span>
-<span class="o">&lt;</span><span class="sr">/script&gt;
-&lt;/</span><span class="n">body</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="sr">/html&gt;</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"> 
+<span class="o">&lt;</span><span class="n">audio</span> <span class="n">src</span><span class="o">=</span><span class="s2">"http://www.w3school.com.cn/i/horse.ogg"</span> <span class="n">controls</span><span class="o">=</span><span class="s2">"controls"</span> <span class="nb">id</span><span class="o">=</span><span class="s2">"audio"</span><span class="o">&gt;</span><span class="err">浏览器不支持</span><span class="o">&lt;</span><span class="sr">/audio&gt;
+ 
+/</span><span class="o">/</span><span class="err">控制音频</span>
+<span class="n">var</span> <span class="n">audio</span><span class="o">=</span><span class="n">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="s2">"audio"</span><span class="p">);</span>
+<span class="n">audio</span><span class="p">.</span><span class="nf">play</span><span class="p">();</span>
+<span class="n">audio</span><span class="p">.</span><span class="nf">loop</span><span class="o">=</span><span class="kp">true</span><span class="p">;</span>
+
+<span class="n">function</span> <span class="n">changeAudio</span><span class="p">(</span><span class="n">event</span><span class="p">){</span>
+    <span class="n">var</span> <span class="n">target</span><span class="o">=</span><span class="n">event</span><span class="p">.</span><span class="nf">target</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">target</span><span class="p">.</span><span class="nf">hidden</span><span class="p">){</span>
+        <span class="n">audio</span><span class="p">.</span><span class="nf">pause</span><span class="p">();</span>
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        <span class="n">audio</span><span class="p">.</span><span class="nf">play</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">document</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="s1">'visibilitychange'</span><span class="p">,</span><span class="n">changeAudio</span><span class="p">,</span><span class="kp">false</span><span class="p">);</span>
+  </code></pre></figure>
 
 <h3 id="page-visibility页面可见性-登录同步"><strong>Page Visibility(页面可见性) –登录同步</strong></h3>
 
@@ -78,51 +73,55 @@
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="sr">//</span><span class="err">登录信息页</span>
 <span class="o">&lt;</span><span class="nb">p</span> <span class="nb">id</span><span class="o">=</span><span class="s2">"loginInfo"</span><span class="o">&gt;&lt;</span><span class="sr">/p&gt;
 (function() {
-    if (typeof pageVisibility.hidden !== "undefined") {
-        var eleLoginInfo = document.querySelector("#loginInfo");
-        var funLoginInfo = function() {
-            var username = localStorage.username || sessionStorage.username;
-            if (username) {
-                eleLoginInfo.innerHTML = '欢迎回来，&lt;strong&gt;' + username + '&lt;/s</span><span class="n">trong</span><span class="o">&gt;</span><span class="s1">';
-                sessionStorage.username = username;
-            } else {
-                eleLoginInfo.innerHTML = '</span><span class="err">您尚未登录，请</span><span class="o">&lt;</span><span class="n">a</span> <span class="n">target</span><span class="o">=</span><span class="s2">"_blank"</span> <span class="n">href</span><span class="o">=</span><span class="s2">"'+ location.href.replace("</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="s2">", "</span><span class="o">-</span><span class="mi">2</span><span class="o">.</span><span class="s2">") +'"</span><span class="o">&gt;</span><span class="err">登录</span><span class="o">&lt;</span><span class="sr">/a&gt;';
-            }    
-        }
-        pageVisibility.visibilitychange(function() {
-            if (!this.hidden) funLoginInfo();
-        });
-        
-        funLoginInfo();
-        
-        /</span><span class="o">/</span> <span class="err">页面关闭清除</span><span class="n">localStorage</span>
-        <span class="n">window</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="s2">"unload"</span><span class="p">,</span> <span class="n">function</span><span class="p">()</span> <span class="p">{</span>
-            <span class="n">localStorage</span><span class="p">.</span><span class="nf">removeItem</span><span class="p">(</span><span class="s2">"username"</span><span class="p">);</span>
-        <span class="p">})</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="n">alert</span><span class="p">(</span><span class="s2">"弹框？？？没错，因为你的这个浏览器不支持Page Visibility API的啦！"</span><span class="p">);</span>    
+    /</span><span class="o">/</span><span class="err">返回后显示登录用户名</span>
+    <span class="n">var</span> <span class="n">loginInfo</span><span class="o">=</span><span class="n">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="s2">"loginInfo"</span><span class="p">);</span> 
+
+    <span class="n">function</span> <span class="n">changePage</span><span class="p">(){</span> 
+        <span class="n">var</span> <span class="n">username</span><span class="o">=</span><span class="n">localStorage</span><span class="p">.</span><span class="nf">name</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">username</span><span class="p">){</span>
+            <span class="n">loginInfo</span><span class="p">.</span><span class="nf">innerHTML</span><span class="o">=</span><span class="s1">'欢迎回来，'</span><span class="o">+</span><span class="n">username</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="n">var</span> <span class="n">href</span><span class="o">=</span><span class="n">location</span><span class="p">.</span><span class="nf">href</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="s2">"index"</span><span class="p">,</span><span class="s2">"login"</span><span class="p">);</span> 
+            <span class="n">loginInfo</span><span class="p">.</span><span class="nf">innerHTML</span><span class="o">=</span><span class="s1">'您尚未登录，请&lt;a href="'</span><span class="o">+</span><span class="n">href</span><span class="o">+</span><span class="s1">'" target="_blank"&gt;登录&lt;/a&gt;'</span><span class="p">;</span>
+
+        <span class="p">}</span> 
     <span class="p">}</span>
+
+    <span class="sr">//</span><span class="err">首次进入页面</span>
+    <span class="n">changePage</span><span class="p">();</span>
+
+    <span class="sr">//</span><span class="err">切换页面回来</span>
+    <span class="n">document</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="s1">'visibilitychange'</span><span class="p">,</span><span class="n">function</span><span class="p">(){</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">document</span><span class="p">.</span><span class="nf">hidden</span><span class="p">){</span>
+            <span class="n">changePage</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">},</span><span class="kp">false</span><span class="p">);</span>
+
+
+    <span class="sr">//</span><span class="err">关闭页面的时候清楚缓存</span>
+    <span class="n">window</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="s2">"unload"</span><span class="p">,</span><span class="n">function</span><span class="p">(){</span>
+        <span class="n">localStorage</span><span class="p">.</span><span class="nf">removeItem</span><span class="p">(</span><span class="s1">'name'</span><span class="p">);</span> 
+    <span class="p">},</span><span class="kp">false</span><span class="p">);</span>
 <span class="p">})();</span>
 
 <span class="sr">//</span><span class="err">登录页面</span>
-<span class="o">&lt;</span><span class="n">form</span> <span class="nb">id</span><span class="o">=</span><span class="s2">"loginForm"</span> <span class="n">action</span><span class="o">=</span><span class="s2">""</span> <span class="nb">method</span><span class="o">=</span><span class="s2">"post"</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="err">用户名：</span><span class="o">&lt;</span><span class="n">input</span> <span class="n">type</span><span class="o">=</span><span class="s2">"text"</span> <span class="nb">name</span><span class="o">=</span><span class="s2">"username"</span> <span class="n">required</span> <span class="sr">/&gt;&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="err">密码：</span><span class="o">&lt;</span><span class="n">input</span> <span class="n">type</span><span class="o">=</span><span class="s2">"password"</span> <span class="nb">name</span><span class="o">=</span><span class="s2">"password"</span> <span class="n">required</span> <span class="sr">/&gt;&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;&lt;</span><span class="n">input</span> <span class="n">type</span><span class="o">=</span><span class="s2">"submit"</span> <span class="o">/&gt;&lt;</span><span class="sr">/p&gt;
+<span class="o">&lt;</span><span class="n">form</span> <span class="nb">id</span><span class="o">=</span><span class="s2">"loginForm"</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">table</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">tr</span><span class="o">&gt;&lt;</span><span class="n">td</span><span class="o">&gt;</span><span class="err">用户名</span><span class="o">&lt;</span><span class="sr">/td&gt;&lt;td&gt;&lt;input type="text" placeholder="请输入用户名" name="username"&gt;&lt;/</span><span class="n">td</span><span class="o">&gt;&lt;</span><span class="sr">/tr&gt;
+        &lt;tr&gt;&lt;td&gt;密码&lt;/</span><span class="n">td</span><span class="o">&gt;&lt;</span><span class="n">td</span><span class="o">&gt;&lt;</span><span class="n">input</span> <span class="n">type</span><span class="o">=</span><span class="s2">"password"</span> <span class="n">placeholder</span><span class="o">=</span><span class="s2">"请输入密码"</span> <span class="nb">name</span><span class="o">=</span><span class="s2">"password"</span><span class="o">&gt;&lt;</span><span class="sr">/td&gt;&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">tr</span><span class="o">&gt;&lt;</span><span class="n">td</span><span class="o">&gt;</span><span class="err">邮箱</span><span class="o">&lt;</span><span class="sr">/td&gt;&lt;td&gt;&lt;input type="email" placeholder="请输入邮箱" name="email"&gt;&lt;/</span><span class="n">td</span><span class="o">&gt;&lt;</span><span class="sr">/tr&gt;
+        &lt;tr&gt;&lt;td colspan="2"&gt;&lt;button type="submit" value="登录" name="submit"&gt;登录&lt;/</span><span class="n">button</span><span class="o">&gt;&lt;</span><span class="sr">/td&gt;&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="sr">/table&gt;
 &lt;/</span><span class="n">form</span><span class="o">&gt;</span>
 
 <span class="p">(</span><span class="n">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">typeof</span> <span class="n">window</span><span class="p">.</span><span class="nf">screenX</span> <span class="o">===</span> <span class="s2">"number"</span><span class="p">)</span> <span class="p">{</span>
-	    <span class="n">var</span> <span class="n">eleLoginForm</span> <span class="o">=</span> <span class="n">document</span><span class="p">.</span><span class="nf">querySelector</span><span class="p">(</span><span class="s2">"#loginForm"</span><span class="p">);</span>
-        <span class="n">eleLoginForm</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="s2">"submit"</span><span class="p">,</span> <span class="n">function</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">localStorage</span><span class="p">.</span><span class="nf">username</span> <span class="o">=</span> <span class="n">document</span><span class="p">.</span><span class="nf">querySelector</span><span class="p">(</span><span class="s2">"input[name='username']"</span><span class="p">).</span><span class="nf">value</span><span class="p">;</span>
-            <span class="n">alert</span><span class="p">(</span><span class="s2">"登录成功！现在可以回到刚才的页面了！"</span><span class="p">);</span>
-            <span class="n">this</span><span class="p">.</span><span class="nf">reset</span><span class="p">();</span>
-            <span class="n">e</span><span class="p">.</span><span class="nf">preventDefault</span><span class="p">();</span>
-        <span class="p">},</span> <span class="kp">false</span><span class="p">);</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="n">alert</span><span class="p">(</span><span class="s2">"弹框？？？没错，因为你的这个浏览器不支持HTML5表单的啦！"</span><span class="p">);</span>    
-    <span class="p">}</span>
+    <span class="n">var</span> <span class="n">loginForm</span><span class="o">=</span><span class="n">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="s2">"loginForm"</span><span class="p">);</span> 
+    <span class="n">loginForm</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="s2">"submit"</span><span class="p">,</span><span class="n">function</span><span class="p">(</span><span class="n">e</span><span class="p">){</span>
+        <span class="n">localStorage</span><span class="p">.</span><span class="nf">name</span><span class="o">=</span><span class="n">loginForm</span><span class="p">.</span><span class="nf">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">value</span><span class="p">;</span>
+        <span class="n">alert</span><span class="p">(</span><span class="s2">"返回首页，您已登录"</span><span class="p">);</span>
+        <span class="n">this</span><span class="p">.</span><span class="nf">reset</span><span class="p">();</span> 
+        <span class="n">e</span><span class="p">.</span><span class="nf">preventDefault</span><span class="p">();</span>
+    <span class="p">})</span>
 <span class="p">})();</span></code></pre></figure>
 
 
