@@ -59,7 +59,7 @@ document.addEventListener('visibilitychange',changeAudio,false);
 {% endhighlight %}
 
 
-### **Page Visibility(页面可见性) --登录同步**
+### **登录同步**
 
 **1.  去淘宝买东西，未登录状态下，进入首页。**
 
