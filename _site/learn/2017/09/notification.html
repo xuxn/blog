@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Elaine blog</title>
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<link rel="stylesheet" href="/blog/css/style.css">
+	<link rel="stylesheet" href="/blog/css/highlight.css">
+</head>
+<body>
+<header>
+  <h1>Elaine <span>Blog<span></h1>
+</header>     
+<section class="container">
+	<div class="arc-con">
+		<h3 id="html5-的-notification-api"><strong>HTML5 的 Notification API</strong></h3>
+
+<p>HTML5 Web Notification通知是属于桌面性质的通知，有点类似于显示器右下角蹦出的QQ弹框，杀毒提示之类的，跟浏览器是脱离的，消息是置顶的。</p>
+
+<h3 id="1申请权限"><strong>1、申请权限</strong></h3>
+
+<p>出于安全考虑，要发送桌面消息，需要先申请用户授权。Notification对象提供了一个静态的方法——requestPermission()，它接收一个回调函数作为参数，并把返回值传递给回调函数作为参数：</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Notification</span><span class="p">.</span><span class="nf">requestPermission</span><span class="p">(</span><span class="n">function</span><span class="p">(</span><span class="n">status</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="no">Notification</span><span class="p">.</span><span class="nf">permission</span> <span class="o">!==</span> <span class="n">status</span><span class="p">){</span>
+        <span class="no">Notification</span><span class="p">.</span><span class="nf">permission</span> <span class="o">=</span> <span class="n">status</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">});</span> </code></pre></figure>
+
+<p>返回值为字符串，有以下三个值：default、granted、denied</p>
+
+<p>其中granted表示用户允许通知，denied表示用户拒绝你，default表示用户目前还没有管你。</p>
+
+<p>默认为default，也就是需要询问。</p>
+
+<p>Notification.permission是一个静态属性。表示是否允许通知，值就是上面的granted, denied, 或default.</p>
+
+<p>默认情况下，Notification.permission的值是’default’。</p>
+
+<p>如果选择了拒绝，无论再怎么刷新，都不会再有提示。要在Chrome浏览器的地址栏左侧，点击控制中心图标。</p>
+
+<p><img src="/blog/img/2017-9-8/1.jpg" alt="Notification" /></p>
+
+<p>将通知改为询问</p>
+
+<p><img src="/blog/img/2017-9-8/2.jpg" alt="Notification" /></p>
+
+<h3 id="2创建消息"><strong>2、创建消息</strong></h3>
+
+<p>用户授权以后，就可以通过new构造显示通知创建一条桌面提醒了：</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">var</span> <span class="n">n</span> <span class="o">=</span> <span class="kp">new</span> <span class="no">Notification</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">options</span><span class="p">);</span>  </code></pre></figure>
+
+<p>其中title是必须参数，表示通知的标题内容，options是可选参数，对象。</p>
+
+<p>常用的options有：</p>
+
+<p>body提示主体内容，字符串，会在标题的下面显示。</p>
+
+<p>icon字符串, 通知面板右侧那个图片地址。</p>
+
+<p>renotify布尔值，新通知出现的时候是否替换之前的。如果设为true，则表示替换，表示当前标记的通知只会出现一个。</p>
+
+<p>silent布尔值，通知出现的时候，是否要有声音。默认false, 表示无声。</p>
+
+<p>sound字符串，音频地址，表示通知出现要播放的声音资源。</p>
+
+<h3 id="3定义事件"><strong>3、定义事件</strong></h3>
+
+<p>Notification对象有四个事件，分别是onshow()、onclick()、onclose()、onerror()，对应在消息显示、被点击、被关闭和出错的时候被触发。</p>
+
+<p>通常情况下，只需要处理点击事件就够了，比如点击消息后跳转到某一特定的页面。</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">var</span> <span class="n">button</span> <span class="o">=</span> <span class="n">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="s1">'button'</span><span class="p">),</span> <span class="n">text</span> <span class="o">=</span> <span class="n">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="s1">'text'</span><span class="p">);</span>
+<span class="n">var</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span>
+    <span class="n">body</span><span class="ss">:"祝福老薛，一往情深彼此都给了同一个人，最幸福莫过于兜兜转转，你还在我身边要好好的，一直走下去。不想再寻觅 那就再爱一次吧 !"</span><span class="p">,</span>
+    <span class="n">icon</span><span class="ss">:'http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg'</span><span class="p">,</span>
+    <span class="n">sound</span><span class="ss">:'http://www.w3school.com.cn/i/horse.ogg'</span><span class="p">,</span>
+    <span class="n">silent</span><span class="ss">:true</span> 
+<span class="p">}</span>
+<span class="n">var</span> <span class="n">title</span><span class="o">=</span><span class="s2">"下一首歌曲"</span><span class="p">;</span>
+<span class="n">button</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="n">function</span><span class="p">(){</span>
+    <span class="no">Notification</span><span class="p">.</span><span class="nf">requestPermission</span><span class="p">(</span><span class="n">function</span><span class="p">(){</span>
+        <span class="k">if</span><span class="p">(</span><span class="no">Notification</span><span class="p">.</span><span class="nf">permission</span><span class="o">==</span><span class="s1">'granted'</span><span class="p">){</span>
+            <span class="n">var</span> <span class="n">n</span> <span class="o">=</span> <span class="kp">new</span> <span class="no">Notification</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">options</span><span class="p">);</span>  
+            <span class="n">n</span><span class="p">.</span><span class="nf">onclick</span><span class="o">=</span><span class="n">function</span><span class="p">(){</span> 
+                <span class="n">text</span><span class="p">.</span><span class="nf">innerHTML</span><span class="o">=</span><span class="s2">"歌曲已播放"</span><span class="p">;</span>
+                <span class="n">n</span><span class="p">.</span><span class="nf">close</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span> 
+            <span class="no">Notification</span><span class="p">.</span><span class="nf">permission</span><span class="o">==</span><span class="s1">'default'</span><span class="p">;</span>
+            <span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">"您已拒绝发送通知"</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">})</span>
+<span class="p">},</span><span class="kp">false</span><span class="p">);</span></code></pre></figure>
+
+
+	</div>
+</section>   
+<footer>
+	<p>Copyright &copy; 2017@Elaine Blog / All rights reserved.</p>
+</footer>
