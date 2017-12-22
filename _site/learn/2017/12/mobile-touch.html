@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Elaine blog</title>
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<link rel="stylesheet" href="/blog/css/style.css">
+	<link rel="stylesheet" href="/blog/css/highlight.css">
+</head>
+<body>
+<header>
+  <h1>Elaine <span>Blog<span></h1>
+</header>     
+<section class="container">
+	<div class="arc-con">
+		<h1 id="手机滑动事件">手机滑动事件</h1>
+
+<p>移动端触屏滑动的效果其实就是图片轮播，需要用到核心的touch事件。</p>
+
+<h3 id="知识储备"><strong>知识储备：</strong></h3>
+
+<h4 id="1-四种touch事件"><strong>1. 四种touch事件：</strong></h4>
+
+<p>touchstart: //手指放到屏幕上时触发</p>
+
+<p>touchmove: //手指在屏幕上滑动式触发</p>
+
+<p>touchend: //手指离开屏幕时触发</p>
+
+<p>touchcancel: //系统取消touch事件的时候触发</p>
+
+<h4 id="2-touchevent对象"><strong>2. TouchEvent对象：</strong></h4>
+
+<p>每一个touch事件的触发都会产生一个TouchEvent对象，以下是TouchEvent对象三个比较常用的重要属性：</p>
+
+<p>touches: //当前位于屏幕上的所有手指的一个列表</p>
+
+<p>targetTouches: //特定于事件目标的Touch对象的数组</p>
+
+<p>changeTouches: //表示自上次触摸以来发生了什么改变的Touch对象的数组</p>
+
+<h4 id="3-touchevent对象属性"><strong>3. TouchEvent对象属性:</strong></h4>
+
+<p>clientX: //触摸目标在视口中的x坐标</p>
+
+<p>clientY: //触摸目标在视口中的y坐标</p>
+
+<p>identifier: //标识触摸的唯一ID</p>
+
+<p>pageX: //触摸目标在页面中的x坐标</p>
+
+<p>pageY: //触摸目标在页面中的y坐标</p>
+
+<p>screenX: //触摸目标在屏幕中的x坐标</p>
+
+<p>screenY: //触摸目标在屏幕中的y坐标</p>
+
+<p>target: //触摸的DOM节点目标</p>
+
+<p><img src="/blog/img/2017-12-22/touchEvent.png" alt="git install" /></p>
+
+<h3 id="原理"><strong>原理：</strong></h3>
+
+<p>1：当开始一个touchstart事件的时候，获取此刻手指的横坐标startX和staerY,并且坚定touchmove和touchend事件。</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="sr">//</span><span class="err">定义</span><span class="n">touchstart</span><span class="err">的事件处理函数</span>
+<span class="n">start</span><span class="ss">:function</span><span class="p">(</span><span class="n">event</span><span class="p">){</span>
+<span class="err">　　</span><span class="n">var</span> <span class="n">touch</span> <span class="o">=</span> <span class="n">event</span><span class="p">.</span><span class="nf">targetTouches</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="sr">//</span><span class="n">touches</span><span class="err">数组对象获得屏幕上所有的</span><span class="n">touch</span><span class="err">，取第一个</span><span class="n">touch</span>
+<span class="err">　　</span><span class="n">startPos</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="ss">:touch</span><span class="p">.</span><span class="nf">pageX</span><span class="p">,</span><span class="n">y</span><span class="ss">:touch</span><span class="p">.</span><span class="nf">pageY</span><span class="p">,</span><span class="n">time</span><span class="p">:</span><span class="o">+</span><span class="kp">new</span> <span class="no">Date</span><span class="p">};</span> <span class="sr">//</span><span class="err">取第一个</span><span class="n">touch</span><span class="err">的坐标值</span>
+<span class="err">　　</span><span class="n">isScrolling</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="sr">//</span><span class="err">这个参数判断是垂直滚动还是水平滚动</span>
+<span class="err">　　</span><span class="n">this</span><span class="p">.</span><span class="nf">slider</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="s1">'touchmove'</span><span class="p">,</span><span class="n">this</span><span class="p">,</span><span class="kp">false</span><span class="p">);</span>
+<span class="err">　　</span><span class="n">this</span><span class="p">.</span><span class="nf">slider</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="s1">'touchend'</span><span class="p">,</span><span class="n">this</span><span class="p">,</span><span class="kp">false</span><span class="p">);</span>
+<span class="p">},</span></code></pre></figure>
+
+<p>2：当触发touchmove事件的时候，再获取此时手指的横坐标moveEndX和纵坐标moveEndY，通过两次获取的坐标差值来判断手指在手机屏幕上的滑动方向，最后再为横向滚动的时候添加一些效果。</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="sr">//</span><span class="err">移动</span>
+<span class="n">move</span><span class="ss">:function</span><span class="p">(</span><span class="n">event</span><span class="p">){</span>
+<span class="err">　　</span><span class="o">/</span><span class="sr">/当屏幕有多个touch或者页面被缩放过，就不执行move操作
+　　if(event.targetTouches.length &gt; 1 || event.scale &amp;&amp; event.scale !== 1) return;
+　　var touch = event.targetTouches[0];
+　　endPos = {x:touch.pageX - startPos.x,y:touch.pageY - startPos.y};
+　　isScrolling = Math.abs(endPos.x) &lt; Math.abs(endPos.y) ? 1:0; /</span><span class="o">/</span><span class="n">isScrolling</span><span class="err">为</span><span class="mi">1</span><span class="err">时，表示纵向滑动，</span><span class="mi">0</span><span class="err">为横向滑动</span>
+<span class="err">　　</span><span class="k">if</span><span class="p">(</span><span class="n">isScrolling</span> <span class="o">===</span> <span class="mi">0</span><span class="p">){</span>
+<span class="err">　　　　</span><span class="n">event</span><span class="p">.</span><span class="nf">preventDefault</span><span class="p">();</span> <span class="sr">//</span><span class="err">阻止触摸事件的默认行为，即阻止滚屏</span>
+<span class="err">　　　　</span><span class="n">this</span><span class="p">.</span><span class="nf">slider</span><span class="p">.</span><span class="nf">className</span> <span class="o">=</span> <span class="s1">'cnt'</span><span class="p">;</span>
+<span class="err">　　　　</span><span class="n">this</span><span class="p">.</span><span class="nf">slider</span><span class="p">.</span><span class="nf">style</span><span class="p">.</span><span class="nf">left</span> <span class="o">=</span> <span class="o">-</span><span class="n">this</span><span class="p">.</span><span class="nf">index</span><span class="o">*</span><span class="mi">600</span> <span class="o">+</span> <span class="n">endPos</span><span class="p">.</span><span class="nf">x</span> <span class="o">+</span> <span class="s1">'px'</span><span class="p">;</span>
+<span class="err">　　</span><span class="p">}</span>
+<span class="p">},</span></code></pre></figure>
+
+<p>3：定义手指从屏幕上拿起的事件，通过判断拿起时两次获取的坐标差值的正负来判断是向左还是向右滑动，添加相应的效果，最后解绑touchmove和touchend事件。</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="sr">//</span><span class="err">滑动释放</span>
+<span class="k">end</span><span class="ss">:function</span><span class="p">(</span><span class="n">event</span><span class="p">){</span>
+<span class="err">　　</span><span class="n">var</span> <span class="n">duration</span> <span class="o">=</span> <span class="o">+</span><span class="kp">new</span> <span class="no">Date</span> <span class="o">-</span> <span class="n">startPos</span><span class="p">.</span><span class="nf">time</span><span class="p">;</span> <span class="sr">//</span><span class="err">滑动的持续时间</span>
+<span class="err">　　</span><span class="k">if</span><span class="p">(</span><span class="n">isScrolling</span> <span class="o">===</span> <span class="mi">0</span><span class="p">){</span> <span class="sr">//</span><span class="err">当为水平滚动时</span>
+<span class="err">　　　　</span><span class="n">this</span><span class="p">.</span><span class="nf">icon</span><span class="p">[</span><span class="n">this</span><span class="p">.</span><span class="nf">index</span><span class="p">].</span><span class="nf">className</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+<span class="err">　　　　</span><span class="k">if</span><span class="p">(</span><span class="no">Number</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">){</span> 
+<span class="err">　　　　　　</span><span class="o">/</span><span class="sr">/判断是左移还是右移，当偏移量大于10时执行
+　　　　　　if(endPos.x &gt; 10){
+　　　　　　　　if(this.index !== 0) this.index -= 1;
+　　　　　　}else if(endPos.x &lt; -10){
+　　　　　　　　if(this.index !== this.icon.length-1) this.index += 1;
+　　　　　　}
+　　　　}
+　　　　this.icon[this.index].className = 'curr';
+　　　　this.slider.className = 'cnt f-anim';
+　　　　this.slider.style.left = -this.index*600 + 'px';
+　　}
+　　/</span><span class="o">/</span><span class="err">解绑事件</span>
+<span class="err">　　</span><span class="n">this</span><span class="p">.</span><span class="nf">slider</span><span class="p">.</span><span class="nf">removeEventListener</span><span class="p">(</span><span class="s1">'touchmove'</span><span class="p">,</span><span class="n">this</span><span class="p">,</span><span class="kp">false</span><span class="p">);</span>
+<span class="err">　　</span><span class="n">this</span><span class="p">.</span><span class="nf">slider</span><span class="p">.</span><span class="nf">removeEventListener</span><span class="p">(</span><span class="s1">'touchend'</span><span class="p">,</span><span class="n">this</span><span class="p">,</span><span class="kp">false</span><span class="p">);</span>
+<span class="p">},</span></code></pre></figure>
+
+<h3 id="案例"><strong>案例：</strong></h3>
+
+<p><a href="http://prototype.ui.sh.ctriptravel.com/git/Platform/h5/v7.9/one-life/dest/track-card.html">http://prototype.ui.sh.ctriptravel.com/git/Platform/h5/v7.9/one-life/dest/track-card.html</a></p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">function</span> <span class="n">touch</span> <span class="p">(</span><span class="n">event</span><span class="p">){</span>  
+    <span class="n">var</span> <span class="n">event</span> <span class="o">=</span> <span class="n">event</span> <span class="o">||</span> <span class="n">window</span><span class="p">.</span><span class="nf">event</span><span class="p">;</span>   
+    <span class="n">switch</span><span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="nf">type</span><span class="p">){</span>  
+        <span class="k">case</span> <span class="s2">"touchstart"</span><span class="p">:</span>    
+            <span class="n">var</span> <span class="n">finger</span> <span class="o">=</span> <span class="n">event</span><span class="p">.</span><span class="nf">targetTouches</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>    
+            <span class="n">startPos</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="ss">:finger</span><span class="p">.</span><span class="nf">pageX</span><span class="p">,</span><span class="n">y</span><span class="ss">:finger</span><span class="p">.</span><span class="nf">pageY</span><span class="p">,</span><span class="n">time</span><span class="p">:</span><span class="o">+</span><span class="kp">new</span> <span class="no">Date</span><span class="p">};</span>   
+            <span class="n">this</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="s1">'touchmove'</span><span class="p">,</span><span class="n">touch</span><span class="p">,</span><span class="kp">false</span><span class="p">);</span>
+            <span class="n">this</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="s1">'touchend'</span><span class="p">,</span><span class="n">touch</span><span class="p">,</span><span class="kp">false</span><span class="p">);</span> 
+            <span class="k">break</span><span class="p">;</span> 
+        <span class="k">case</span> <span class="s2">"touchmove"</span><span class="p">:</span>   
+            <span class="n">var</span> <span class="n">finger</span><span class="o">=</span><span class="n">event</span><span class="p">.</span><span class="nf">targetTouches</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+            <span class="n">endPos</span><span class="o">=</span><span class="p">{</span><span class="n">x</span><span class="ss">:finger</span><span class="p">.</span><span class="nf">pageX</span><span class="o">-</span><span class="n">startPos</span><span class="p">.</span><span class="nf">x</span><span class="p">,</span><span class="n">y</span><span class="ss">:finger</span><span class="p">.</span><span class="nf">pageY</span><span class="o">-</span><span class="n">startPos</span><span class="p">.</span><span class="nf">y</span><span class="p">}</span>
+            <span class="n">liWidth</span><span class="o">=</span><span class="n">this</span><span class="p">.</span><span class="nf">getElementsByTagName</span><span class="p">(</span><span class="s2">"li"</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nf">clientWidth</span><span class="p">;</span> 
+            <span class="sr">//</span><span class="err">判断是上下滑动还是左右滑动</span><span class="p">,</span><span class="mi">1</span><span class="err">是上下，</span><span class="mi">0</span><span class="err">是左右</span>
+            <span class="n">isScrolling</span> <span class="o">=</span> <span class="no">Math</span><span class="p">.</span><span class="nf">abs</span><span class="p">(</span><span class="n">endPos</span><span class="p">.</span><span class="nf">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="no">Math</span><span class="p">.</span><span class="nf">abs</span><span class="p">(</span><span class="n">endPos</span><span class="p">.</span><span class="nf">y</span><span class="p">)</span><span class="sc">?1</span><span class="p">:</span><span class="mi">0</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">isScrolling</span> <span class="o">===</span> <span class="mi">0</span><span class="p">){</span>
+                <span class="n">event</span><span class="p">.</span><span class="nf">preventDefault</span><span class="p">();</span> 
+                <span class="n">this</span><span class="p">.</span><span class="nf">style</span><span class="p">.</span><span class="nf">left</span> <span class="o">=</span> <span class="o">-</span><span class="n">liWidth</span><span class="o">*</span><span class="n">index</span><span class="o">+</span><span class="n">endPos</span><span class="p">.</span><span class="nf">x</span><span class="o">+</span><span class="s2">"px"</span><span class="p">;</span>
+            <span class="p">}</span> 
+            <span class="k">break</span><span class="p">;</span>   
+        <span class="k">case</span> <span class="s2">"touchend"</span><span class="p">:</span>  
+            <span class="k">if</span><span class="p">(</span><span class="n">isScrolling</span> <span class="o">===</span> <span class="mi">0</span><span class="p">){</span>  
+                <span class="n">this</span><span class="p">.</span><span class="nf">getElementsByTagName</span><span class="p">(</span><span class="s2">"li"</span><span class="p">)[</span><span class="n">index</span><span class="p">].</span><span class="nf">className</span><span class="o">=</span><span class="s2">" "</span><span class="p">;</span>
+                <span class="n">sliderDot</span><span class="p">[</span><span class="n">index</span><span class="p">].</span><span class="nf">className</span><span class="o">=</span><span class="s2">" "</span><span class="p">;</span>
+
+                <span class="sr">//</span><span class="err">判断向左还是右</span> 
+                <span class="k">if</span><span class="p">(</span><span class="n">endPos</span><span class="p">.</span><span class="nf">x</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">10</span><span class="p">){</span>
+                    <span class="sr">//</span><span class="err">向左滑动</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">index</span> <span class="o">!==</span> <span class="n">this</span><span class="p">.</span><span class="nf">getElementsByTagName</span><span class="p">(</span><span class="s2">"li"</span><span class="p">).</span><span class="nf">length</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="n">index</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
+                <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">endPos</span><span class="p">.</span><span class="nf">x</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">){</span>
+                    <span class="sr">//</span><span class="err">向右滑动</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">index</span> <span class="o">!==</span> <span class="mi">0</span><span class="p">)</span> <span class="n">index</span> <span class="o">-=</span><span class="mi">1</span><span class="p">;</span>
+                <span class="p">}</span> 
+                <span class="k">if</span><span class="p">(</span><span class="n">index</span><span class="o">&lt;</span><span class="n">this</span><span class="p">.</span><span class="nf">getElementsByTagName</span><span class="p">(</span><span class="s2">"li"</span><span class="p">).</span><span class="nf">length</span><span class="o">-</span><span class="mi">1</span><span class="p">){</span>
+                    <span class="n">liWidth</span><span class="o">=</span><span class="n">this</span><span class="p">.</span><span class="nf">getElementsByTagName</span><span class="p">(</span><span class="s2">"li"</span><span class="p">)[</span><span class="n">index</span><span class="p">].</span><span class="nf">clientWidth</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="n">this</span><span class="p">.</span><span class="nf">getElementsByTagName</span><span class="p">(</span><span class="s2">"li"</span><span class="p">)[</span><span class="n">index</span><span class="p">].</span><span class="nf">className</span><span class="o">=</span><span class="s2">"active"</span><span class="p">;</span>
+                <span class="n">sliderDot</span><span class="p">[</span><span class="n">index</span><span class="p">].</span><span class="nf">className</span><span class="o">=</span><span class="s2">"curr"</span><span class="p">;</span>
+                <span class="n">index</span><span class="o">===</span><span class="mi">0</span><span class="p">?</span><span class="n">this</span><span class="p">.</span><span class="nf">style</span><span class="p">.</span><span class="nf">left</span><span class="o">=</span><span class="mi">0</span><span class="ss">:this</span><span class="p">.</span><span class="nf">style</span><span class="p">.</span><span class="nf">left</span> <span class="o">=</span>  <span class="o">-</span><span class="n">index</span><span class="o">*</span><span class="n">liWidth</span><span class="o">/</span><span class="mi">16</span><span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">3</span> <span class="o">+</span> <span class="s1">'rem'</span><span class="p">;</span> 
+            <span class="p">}</span>
+            <span class="n">this</span><span class="p">.</span><span class="nf">removeEventListener</span><span class="p">(</span><span class="s1">'touchmove'</span><span class="p">,</span><span class="n">this</span><span class="p">,</span><span class="kp">false</span><span class="p">);</span>
+            <span class="n">this</span><span class="p">.</span><span class="nf">removeEventListener</span><span class="p">(</span><span class="s1">'touchend'</span><span class="p">,</span><span class="n">this</span><span class="p">,</span><span class="kp">false</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>  
+    <span class="p">}</span>      
+<span class="p">}</span>   
+<span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="n">slider</span><span class="o">=</span><span class="n">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="s2">"slider"</span><span class="p">);</span>
+<span class="n">slider</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="s2">"touchstart"</span><span class="p">,</span><span class="n">touch</span><span class="p">,</span><span class="kp">false</span><span class="p">);</span>
+<span class="n">sliderDots</span><span class="o">=</span><span class="n">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="s1">'dots'</span><span class="p">);</span>
+<span class="n">sliderDot</span><span class="o">=</span> <span class="n">sliderDots</span><span class="p">.</span><span class="nf">getElementsByTagName</span><span class="p">(</span><span class="s1">'span'</span><span class="p">);</span> </code></pre></figure>
+
+
+	</div>
+</section>   
+<footer>
+	<p>Copyright &copy; 2017@Elaine Blog / All rights reserved.</p>
+</footer>
